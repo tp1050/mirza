@@ -40,27 +40,4 @@ def getHTML(url,secure=0):
         print (e)
         return "[ERROR]"+str(e)
 
-def myIP(session=requests.session()):
-    """
-    Stuborn function to extract callerIP for a passed sesssion.
-    """
-    provider =[ 'http://farbodfarjadi.rf.gd/',
-                'https://www.cloudflare.com/cdn-cgi/trace',
-                'https://idenrrt.me/',
-                'http://icanhazip.com',
-                'http://httpbin.org/ip',
-                'http://checkip.amazonaws.com/']
-    ret=[]
 
-    for p in provider:
-        res="2"
-        try:
-
-            # res = session.get(p).text
-            print('trying : ' +p)
-            res=getHTML(p)
-            s=re.findall('[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}',res)
-            ret.append(s)
-        except Exception as e:
-            ret.append(e.args)
-    return ret
