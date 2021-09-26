@@ -2,26 +2,7 @@ import platform
 from noche import dic2str
 
 
-"""
-Method provides system info
 
-Takes as argument
-
-BioType:   Soft|Hard|Full 
-software bio
-hardware bio
-defualt set to Hard
-
-
-"""
-
-def whoAmI():
-	info = {}
-	info["platform details"]  = platform.platform()
-	info["system name"]= platform.system()
-	info["processor name"]  = platform.processor()
-	info["architectural detail"] = platform.architecture()
-	return dic2str(info)
 
 
 """
@@ -61,6 +42,37 @@ def myIP(session=requests.session()):
 
 
 
+
+"""
+REturns True if the IP provided is VPN/PROXY PROVIDER OR TOR exit node
+"""
+def isProxy(ip):
+	pass
+
+
+"""
+Method provides system info
+
+Takes as argument
+
+BioType:   Soft|Hard|Full 
+software bio
+hardware bio
+defualt set to Hard
+
+
+"""
+
+def whoAmI():
+	info = {}
+	info["platform details"]  = platform.platform()
+	info["system name"]= platform.system()
+	info["processor name"]  = platform.processor()
+	info["architectural detail"] = platform.architecture()
+	return dic2str(info)
+
+
+
 """
 Retruns the Geo Data using current IP
 Arguemnts:
@@ -74,7 +86,21 @@ def whereAmI(ip=myIP(),details="full"):
 
 
 """
-REturns True if the IP provided is VPN/PROXY PROVIDER OR TOR exit node
+returns a summery snapshot of system
+such as memory usage
+cpu usage etc
 """
-def isProxy(ip):
-	pass
+def howAmI():
+    pass
+
+"""
+A method to identify the service provicder and type of service
+e.g 3g serrvice by Tmobile or Verozion 
+ISP 
+
+"""
+
+def getProvider(ip=myIP()):
+    p=""
+    return p
+
