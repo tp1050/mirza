@@ -28,6 +28,14 @@ Text Processing
 """
 
 ###############
+
+def dic2str(d,separator=':'):
+	s = ""
+	tmp='{} {} {}'
+	for i, j in d.items():
+		s=s+'\n \\n'+tmp.format(str(i),separator,str(j))
+	return s
+
 def sortedDict(words):
     count_dict = {}
     for w in words:

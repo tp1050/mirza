@@ -7,7 +7,7 @@ def getAnbar():
     """ Connect to MySQL database """
     conn = None
     try:
-        conn = mysql.connector.connect( host="bookine.ir",
+        conn = mysql.connector.connect( host="192.168.5.17",
                                         user='doolsaz',
                                         password='22111357',)
         if conn.is_connected():
@@ -21,6 +21,7 @@ def getAnbar():
 
 
 def exec(stmt):
+    print('%s'%stmt)
     conn = getAnbar()
     mc = conn.cursor(buffered=True)
     recs=""
@@ -31,13 +32,24 @@ def exec(stmt):
         print(recs)
     except Exception as e:
         print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+        recs='Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e
             #print(agahi)
     mc.close()
     conn.close()
     recs=str(recs)
     return recs
 
+def begir():
+    pass
 
+
+"""
+jason{
+
+'Tabanle':''
+'cols':{colname:value}
+}
+"""
 
 ###
 #Bama Anbar Tools
