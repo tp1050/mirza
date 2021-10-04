@@ -23,8 +23,8 @@ def mysqlConnector():
             # conn.escape_string()
             return conn
 
-    except Exception as e:
-        print(e)
+    except mysql.connector.Error as error:
+        print("parameterized query failed {}".format(error))
 
 # an automated function with this output :
 #'INSERT INTO ks.currencies (Country,CountryCode,Currency,Code) VALUES(%s,%s,%s,%s)'
@@ -38,10 +38,10 @@ def  autoSqlProducer():
 
     L=range(len(row1))
     # str for using in sql column specifier
-    ks=''
+    cn=''
     for i in L:
-        ks = ks + row1[i] +","
-    ks = "("+ ks[:-1] +")"
+        cn = cn + row1[i] +","
+    cn = "("+ cn[:-1] +")"
 
     # str for using in sql value specifier
     val =''
@@ -49,8 +49,7 @@ def  autoSqlProducer():
         val=val +"%s,"
     val ="("+val[:-1]+")"
 
-    sql =f"INSERT INTO {tableName} {ks} VALUES {val}"
-    
+    sql =f"INSERT INTO {tableName} {cn} VALUES {val}"
     return sql
 
 #        mc.execute(stmtInsertAgahi,(agahi['description'],agahi['price'],agahi['size'],agahi['location'],' '.join(agahi['phone']),j[0],agahi['sahebAD'],agahi['title'],agahi['city'],agahi['img']))
@@ -62,16 +61,17 @@ def insertion():
     with open(filepath,'r') as readObj:
         csvReader=csv.reader(readObj)
         # removing the headers : attention if you are using you must not remove the first row
-        next(csvReader,None)
+        # next(csvReader,None)
         for row in csvReader:
+            # print(row)
             sql=str(autoSqlProducer())
             # # print(row[0],row[1],row[2],row[3],row[4])
-            # cursor.execute(sql,(row[0],row[1],row[2],row[3],row[4]))
+            cursor.execute(sql,(row[0],row[1],row[2],row[3],row[4]))
 
     mydb.commit()
 
 mysqlConnector()
 mydb=mysqlConnector()
-cursor=mydb.cursor()
+cursor=mydb.cursor(prepared=True)
 insertion()
 cursor.close()
