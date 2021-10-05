@@ -1,6 +1,13 @@
 import platform
+import IP2Proxy
 from noche import dic2str
-
+import re
+import psutil
+import platform
+# for gpu 
+import GPUtil
+from tabulate import tabulate
+from datetime import datetime
 
 
 
@@ -46,8 +53,54 @@ def myIP(session=requests.session()):
 """
 REturns True if the IP provided is VPN/PROXY PROVIDER OR TOR exit node
 """
-def isProxy(ip):
-	pass
+
+
+db = IP2Proxy.IP2Proxy()
+# open IP2Proxy BIN database for proxy lookup
+db.open("IP2PROXY-LITE-PX10.BIN")
+
+def isproxy(proxyip):
+
+    # get versioning information
+    versionDict = {
+            'Module Version'  : db.get_module_version() ,
+            'Package Version'  : db.get_package_version() ,
+            'Database Version'  : db.get_database_version(),
+        }
+
+    # single function to get all proxy data returned in array
+    # this returns a dict 
+    record = db.get_all(proxyip)
+    userinput = input('if you want the info to be shown enter p otherwise enter c :')
+    if userinput == 'p' :
+
+        print ('Is Proxy: ' + str(record['is_proxy']))
+        print ('Proxy Type: ' + record['proxy_type'])
+        print ('Country Code: ' + record['country_short'])
+        print ('Country Name: ' + record['country_long'])
+        print ('Region Name: ' + record['region'])
+        print ('City Name: ' + record['city'])
+        print ('ISP: ' + record['isp'])
+        print ('Domain: ' + record['domain'])
+        print ('Usage Type: ' + record['usage_type'])
+        print ('ASN: ' + record['asn'])
+        print ('AS Name: ' + record['as_name'])
+        print ('Last Seen: ' + record['last_seen'])
+        print ('Threat: ' + record['threat'])
+        print ('Provider: ' + record['provider'])
+        print (versionDict['Module Version'])
+        print (versionDict['Package Version'])
+        print (versionDict['Database Version'])
+    else:
+
+        # close IP2Proxy BIN database
+        db.close()
+
+    # Web Service
+    ws = IP2Proxy.IP2ProxyWebService("demo","PX11",True)
+    rec = ws.lookup("89.208.35.79")
+    print ("\n")
+    print ("Credit Remaining: {}\n".format(ws.getcredit()))
 
 
 """
@@ -62,8 +115,14 @@ defualt set to Hard
 
 
 """
+def getSize(bytes, suffix='B'):
+    factor = 1024
+    for unit in ["", "K", "M", "G", "T", "P"]:
+        if bytes < factor:
+            return f"{bytes:.2f}{unit}{suffix}"
+        bytes /= factor 
 
-def whoAmI():
+def whoAmI2():
 	info = {}
 	info["platform details"]  = platform.platform()
 	info["system name"]= platform.system()
