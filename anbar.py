@@ -4,6 +4,14 @@ import mysql.connector
 from mysql.connector import Error
 import sys
 
+#Block access to internal Variables
+defHost="192.168.5.17"
+user='doolsaz'
+password='22111357'
+
+#Option for secure connection
+#Option for X-SQL sys
+
 def getAnbar():
     """ Connect to MySQL database """
     conn = None
