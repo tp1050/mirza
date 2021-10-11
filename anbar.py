@@ -1,4 +1,5 @@
 
+#comment
 import mysql.connector
 from mysql.connector import Error
 import sys
