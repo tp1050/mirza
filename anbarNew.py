@@ -61,6 +61,7 @@ def execSysCmd():
     print('stdout :', result.stdout)
     print('stderr :', result.stderr)
 
+# reconnect function if connection refused first time 
 def getAnbarReconn(Host, User , Password ,DbName,secure=0):
     if secure:
         pass
@@ -80,6 +81,7 @@ def getAnbarReconn(Host, User , Password ,DbName,secure=0):
         usrin=input("The MYSQL-server you are accessing is down you wish to set it up again? y/n  \nBe aware you need clearance ! ")
         # find a way to execute  with out asking for root password
         #this is working for know
+        # this piece has a malfunction it is needed to be fixed (mal error diagnostic for mysql status )
         if usrin=='y':
             prc1=subprocess.run(
             ['sudo','service','mysql','status'],capture_output=True,text=True
