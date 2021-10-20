@@ -6,14 +6,16 @@ from urllib.request import urlopen
 import time
 from json import *
 import requests
-import re, string
+import re, string,sys
+import Javab
+import subprocess
 
 ###########
 
 """
 Random Text helper
 """
-def berin(n=1,sign='-'):
+def berin(n=1,sign='-',indent=0):
     s=sign
     for i in range(n):
         s=s+sign
@@ -28,6 +30,10 @@ Text Processing
 """
 
 ###############
+
+def sexyError(e):
+    print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+    return 'Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e
 
 def dic2str(d,separator=':'):
 	s = ""
@@ -217,3 +223,11 @@ def cleanAgahiBama(s):
     except Exception as e:
         print (e)
         return str(e)
+
+def execSysCmd(dastoor):
+    result=subprocess.run(
+    # the text=True makes the byte str
+    [dastoor.split(' ')], capture_output=True ,text=True
+    )
+    j=Javab(result.stdout,result.stderr)
+    return j

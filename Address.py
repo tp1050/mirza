@@ -34,10 +34,11 @@ class Address(object):
 
     def getLocation(self):
         temp={}
-        temp['host']:self.host
-        temp['user']:self.user
-        temp['password']:self.password
-        temp['port']:self.port
-        temp['database']:self.database
-        return temp
+        temp['host']=self.host
+        temp['user']=self.user
+        temp['password']=self.password
+        temp['port']=self.port
+        temp['database']=self.database
+        res=temp
+        return res
 

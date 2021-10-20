@@ -8,21 +8,8 @@ from Javab import *
 
 #Block access to internal Variables
 
-""" localhost """
-# defHost="192.168.5.17"
-# defUser='doolsaz'
-# defPassword='22111357'
-# defDatabase='ks'
-""" C server """
-# defHost='84.241.63.0' # database error
-# defUser='aren'       # user and pass wrong: ProgrammingError
-# defPassword='karen'
-# defDatabase='ks'      # nothing till further notice !
-""" D server """
-defHost='localhost' # database error
-defUser='karen'       # user and pass wrong: ProgrammingError
-defPassword='Karen22111357*'
-defDatabase='ISP'      # nothing till further notice !
+
+
 #Option for secure connection
 #Option for X-SQL sys
 #ablity to connect via proxy
@@ -30,13 +17,7 @@ defDatabase='ISP'      # nothing till further notice !
 
 """a function for executing system commands  """
 
-def execSysCmd():
-    result=subprocess.run(
-    # the text=True makes the byte str
-    ['ls'], capture_output=True ,text=True
-    )
-    print('stdout :', result.stdout)
-    print('stderr :', result.stderr)
+
 
 # reconnect function if connection refused first time 
 def getAnbarReconn(Host, User , Password ,DbName,secure=0):

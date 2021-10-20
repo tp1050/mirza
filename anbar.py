@@ -2,14 +2,19 @@
 import mysql.connector
 from mysql.connector import Error
 import sys
+from Address import *
+from noche import berin,sexyError
 
-def getAnbar():
-    """ Connect to MySQL database """
+def getAnbar(loc:Address=Address(),secure=0):
+    if secure:
+        return False
+
     conn = None
+    l=loc.getLocation()
+    print(l)
     try:
-        conn = mysql.connector.connect( host="192.168.5.17",
-                                        user='doolsaz',
-                                        password='22111357',)
+        conn = mysql.connector.connect(**l)
+        berin(1,'%')
         if conn.is_connected():
             print('Connected to MySQL database')
             # conn.escape_string()
@@ -21,7 +26,6 @@ def getAnbar():
 
 
 def exec(stmt):
-    print('%s'%stmt)
     conn = getAnbar()
     mc = conn.cursor(buffered=True)
     recs=""
@@ -31,9 +35,7 @@ def exec(stmt):
         recs=mc.fetchall()
         print(recs)
     except Exception as e:
-        print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
-        recs='Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e
-            #print(agahi)
+        sexyError(e)
     mc.close()
     conn.close()
     recs=str(recs)
