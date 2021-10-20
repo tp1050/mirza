@@ -3,30 +3,7 @@ import mysql.connector
 from mysql.connector import Error
 import sys
 import subprocess
-
-class Javab(object):
-    eCodery={
-        '001': 'Access denied ',
-        '002': 'Unknown MySQL server host',
-        # when you do not specify a dbName and give the exec() the sql
-        '003': 'No database selected',
-        }
-
-    def Javab(self,j,e):
-        error=e
-        javab=j
-
-    # private javab=''
-    # private error=''
-    def setError(e):
-        error =e
-
-    def setJavab(j):
-        javab=j
-    def getJavab():
-        return javab
-    def getError():
-        return Error
+from noche import save
 
 
 #Block access to internal Variables
