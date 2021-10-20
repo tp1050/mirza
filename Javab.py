@@ -1,27 +1,28 @@
+from noche import save as saveNoche
 class Javab(object):
     def __init__(self, ret='   ', error='200'):
         self.ret = ret
         self.error = error
 
-    def setError(e):
+    def setError(self,e):
         self.error =e
 
-    def setJavab(j):
+    def setJavab(self,j):
         self.ret=j
 
-    def getJavab():
+    def getJavab(self):
         return self.ret
 
-    def getError():
+    def getError(self):
         return self.error
 
-    def isMosbat():
+    def isMosbat(self):
         if self.error=='100':
             return True
         return False
 
-    def save():
-        save(str())
+    def save(self):
+        saveNoche(self.str())
 
 
     def str(self):
