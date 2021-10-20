@@ -13,7 +13,7 @@ import re, string
 """
 Random Text helper
 """
-def berin(n=0,sign='-'):
+def berin(n=1,sign='-'):
     s=sign
     for i in range(n):
         s=s+sign
