@@ -1,30 +1,25 @@
 class Javab(object):
-    ret=''
-    error='200'
-    eCodery={
-        '001': 'Access denied ',
-        '002': 'Unknown MySQL server host',
-        # when you do not specify a dbName and give the exec() the sql
-        '003': 'No database selected',
-        '100': 'success'
-        }
+    def __init__(self, ret='', error='200'):
+        self.ret = ret
+        self.error = error
 
-    def Javab(self,r,e):
-        error=e
-        ret=r
-
-    # private javab=''
-    # private error=''k
+    # eCodery={
+    #     '001': 'Access denied ',
+    #     '002': 'Unknown MySQL server host',
+    #     '003': 'No database selected',
+    #     '100': 'success'
+    #     }
     def setError(e):
-        error =e
-        def setJavab(j):
-        ret=j
+        self.error =e
+    def setJavab(j):
+        self.ret=j
     def getJavab():
-        return ret
+        return self.ret
     def getError():
-        return error
+        return self.error
+
     def str(self):
-        tmp='{} \n {}'.format(ret,error)
+        tmp='{} \n {}'.format(self.ret,self.error)
         return tmp
     def isMosbat(self):
         if error=='100':
