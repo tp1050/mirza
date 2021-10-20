@@ -4,12 +4,15 @@ from mysql.connector import Error
 import sys
 from Address import *
 from noche import berin,sexyError
+import MySQLdb
+
+def mySQLize(s):
+    return   MySQLdb.escape_string(s)
 
 def getAnbar(loc:Address=Address(),secure=0):
     if secure:
         return False
-
-    conn = None
+    # conn = None
     l=loc.getLocation()
     print(l)
     try:
@@ -17,7 +20,7 @@ def getAnbar(loc:Address=Address(),secure=0):
         berin(1,'%')
         if conn.is_connected():
             print('Connected to MySQL database')
-            # conn.escape_string()
+
             return conn
 
     except Error as e:

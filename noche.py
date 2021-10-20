@@ -10,6 +10,14 @@ import re, string,sys
 from Javab import *
 import subprocess
 
+
+def execSysCmd(dastoor):
+    result=subprocess.run(
+    # the text=True makes the byte str
+    [dastoor], capture_output=True ,text=True
+    )
+    j=Javab(ret=result.stdout,error=result.stderr)
+    return j
 ###########
 
 """
@@ -224,10 +232,3 @@ def cleanAgahiBama(s):
         print (e)
         return str(e)
 
-def execSysCmd(dastoor):
-    result=subprocess.run(
-    # the text=True makes the byte str
-    [dastoor], capture_output=True ,text=True
-    )
-    j=Javab(ret=result.stdout,error=result.stderr)
-    return j
