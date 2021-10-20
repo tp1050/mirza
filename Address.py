@@ -33,6 +33,11 @@ class Address(object):
         return self.serverType
 
     def getLocation(self):
-        tmp=(self.host,self.user,self.password)
-        return tmp
+        temp={}
+        temp['host']:self.host
+        temp['user']:self.user
+        temp['password']:self.password
+        temp['port']:self.port
+        temp['database']:self.database
+        return temp
 
