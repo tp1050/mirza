@@ -22,7 +22,7 @@ class Javab(object):
         tmp='{} \n {}'.format(self.ret,self.error)
         return tmp
     def isMosbat(self):
-        if error=='100':
+        if self.error=='100':
             return True
         return False
     def save(self):
