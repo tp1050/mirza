@@ -227,7 +227,7 @@ def cleanAgahiBama(s):
 def execSysCmd(dastoor):
     result=subprocess.run(
     # the text=True makes the byte str
-    [dastoor.split(' ')], capture_output=True ,text=True
+    [dastoor], capture_output=True ,text=True
     )
-    j=Javab(result.stdout,result.stderr)
+    j=Javab(ret=result.stdout,error=result.stderr)
     return j
