@@ -7,7 +7,7 @@ import time
 from json import *
 import requests
 import re, string,sys
-import Javab
+from Javab import *
 import subprocess
 
 ###########
