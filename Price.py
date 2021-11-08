@@ -22,6 +22,11 @@ class Price(object):
     def getPrice(self):
         return self.price
 
+    def setSrc(self,val):
+        self.src=val
+    def getSrc(self):
+        return self.src
+
 
     def getDic(self):
         return vars(self)

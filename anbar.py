@@ -1,14 +1,11 @@
-
 import mysql.connector
 from mysql.connector import Error
 import sys
 from Address import *
 from noche import berin,sexyError
 import MySQLdb
-
 def mySQLize(s):
     return   MySQLdb.escape_string(s)
-
 def getAnbar(loc:Address=Address(),secure=0):
     if secure:
         return False
@@ -17,37 +14,58 @@ def getAnbar(loc:Address=Address(),secure=0):
     print(l)
     try:
         conn = mysql.connector.connect(**l)
-        berin(1,'%')
+        # berin(1,'%')
         if conn.is_connected():
             print('Connected to MySQL database')
 
             return conn
 
     except Error as e:
-        print(e)
-
-
-
-def exec(stmt):
-    conn = getAnbar()
+        sexyError(e)
+def exec(stmt,conn='NO'):
+    passed=1
+    if conn=='NO':
+        conn = getAnbar()
+        passed = 0
     mc = conn.cursor(buffered=True)
-    recs=""
+    recs="   "
     try:
         mc.execute(stmt)
         conn.commit()
-        recs=mc.fetchall()
-        print(recs)
+        recs=mc.fetchone()
     except Exception as e:
         sexyError(e)
     mc.close()
-    conn.close()
-    recs=str(recs)
+    if not passed:
+        conn.close()
     return recs
 
-def begir():
-    pass
 
 
+# def begir(col,tbl,cndtion,conn='NO'):
+#     if conn=='NO':
+#         conn = getAnbar()
+#
+#     stmt2=stmt.format(col,tbl,cndtion,col)
+#     ret=(
+#     return ret
+
+def getSymID(org,conn='NO'):
+    res=-1
+    if conn=='NO':
+        conn = getAnbar()
+    stmt = 'select ID,eq from Moozmar.Dictionary where original="{}";'
+    res=exec(stmt.format(org), conn)
+    if res is not None:
+        res=res[0]
+
+    else:
+        exec('insert into Moozmar.Dictionary(original) values("{}");'.format(org),conn)
+        res=getSymID(org,conn)
+    return res
+
+#
+# def getCurID(cur)
 """
 jason{
 

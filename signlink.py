@@ -3,10 +3,9 @@ import json
 from bs4 import BeautifulSoup as bs
 import requests
 
-def getPrice():
+def getcPrice():
     priceInfoDict={}
-    a=getHTML("https://api.accessban.com/v1/widget")
-    aa=a.splitlines()
+    a=getHTML("https://api.accessban.com/v1/widget").splitlines()
     jjj=[]
     for aaa in aa:
 
