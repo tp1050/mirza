@@ -49,6 +49,11 @@ def begir(tbl,col,cndtion,conn='NO'):
     stmt2=stmt.format(col,tbl,col,cndtion)
     ret=exec(stmt2)
     return ret
+def bezar(tbl,col,val,conn='NO'):
+    if conn == 'NO':
+        conn = getAnbar()
+    stmt='insert into {} ({}) values({});'.format(tbl,col,val)
+    return exec(stmt,conn)
 
 def getDicID(org,conn='NO'):
     res=-1
