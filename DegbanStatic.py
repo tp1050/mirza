@@ -22,6 +22,7 @@ base0LAN=Address(host='192.168.2.10',user='c',database='Moozmar')
 class DegJet(object):
 
     def __init__(self,conn='No'):
+        self.test='test'
         self.conn=conn
 
     def getDic(self):
@@ -35,10 +36,18 @@ class DegJet(object):
         dic=self.getDic()
         s=''
         for k in dic:
-            s=k+','+s
-        pp=berin(sign=',{}',n=slen(dic))[1:]
+            s=s+','+k
+        s=s[1:]
+        print(s)
+        pp=berin(sign=',{}',n=len(dic.keys()))[1:]
+        print(pp)
+        i=0
         for k in dic:
-            pp=pp.format(dic[k])
+            berin(i,'+')
+            print(dic[k])
+            pp=pp.format((k,dic[k]))
+            print(pp)
+            i=i+1
         # stmt=self.begoo(sep=',')
         # bezar()
         print(s,pp)

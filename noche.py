@@ -34,8 +34,8 @@ def berin(n=1,sign='-',indent=0):
         sign=datetime.now()
     for i in range(n):
         sign=sign+sign
-    print(s)
-    return s
+    print(sign)
+    return sign
 
 ###########
 
