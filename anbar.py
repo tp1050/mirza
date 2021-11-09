@@ -6,20 +6,21 @@ from noche import berin,sexyError
 import MySQLdb
 def mySQLize(s):
     return   MySQLdb.escape_string(s)
-def getAnbar(loc:Address=Address(),secure=0):
+def getAnbar(loc='No',secure=0):
+    if loc=='N0':
+        loc=Address()
     if secure:
         return False
-    # conn = None
     l=loc.getLocation()
-    print(l)
+    # print(l)
     try:
         conn = mysql.connector.connect(**l)
         # berin(1,'%')
         if conn.is_connected():
             print('Connected to MySQL database')
-
             return conn
-
+        else:
+            return None
     except Error as e:
         sexyError(e)
 def exec(stmt,conn='NO'):
