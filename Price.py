@@ -19,8 +19,17 @@ class Price(object):
         self.value=newVal
         #get Xchange Rate of curRef to neCur
         #update the abslout price value and newCur Simulataneously
-    # def compare(self,p:Price):
-    #     pass
+    def compare(self,p:Price):
+        if self.refCurID==p.refCurID:
+           if self.value>p.value:
+               return 'Bigger'
+           else:
+               return 'Smaller'
+        else:
+            #make same
+            pass
+        
+    #    pass
     #     #compare the current price instance with passed var
 
     def setPrice(self,val):
