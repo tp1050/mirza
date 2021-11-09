@@ -26,11 +26,7 @@ class Price(object):
            else:
                return 'Smaller'
         else:
-            #make same
             pass
-        
-    #    pass
-    #     #compare the current price instance with passed var
 
     def setPrice(self,val):
         self.price=val
