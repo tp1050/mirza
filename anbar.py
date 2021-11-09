@@ -50,19 +50,31 @@ def exec(stmt,conn='NO'):
 #     ret=(
 #     return ret
 
-def getSymID(org,conn='NO'):
+def getDicID(org,conn='NO'):
     res=-1
     if conn=='NO':
         conn = getAnbar()
     stmt = 'select ID,eq from Moozmar.Dictionary where original="{}";'
     res=exec(stmt.format(org), conn)
     if res is not None:
-        res=res[0]
+        # print(res)
+        res=res
 
     else:
         exec('insert into Moozmar.Dictionary(original) values("{}");'.format(org),conn)
         res=getSymID(org,conn)
     return res
+
+def getSymID(dicEq,conn = 'NO'):
+    if conn == 'NO':
+        conn = getAnbar()
+    stmt = 'select ID from Moozmar.Deg2Sym where sym="{}";'.format(dicEq)
+    res = exec(stmt.format(dicEq), conn)
+    if res is not None:
+        return res[0]
+    # print(res)
+    return -1
+
 
 #
 # def getCurID(cur)

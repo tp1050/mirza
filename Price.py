@@ -13,9 +13,9 @@ class Price(object):
         pass
         #get Xchange Rate of curRef to neCur
         #update the abslout price value and newCur Simulataneously
-    def compare(self,p:Price):
-        pass
-        #compare the current price instance with passed var
+    # def compare(self,p:Price):
+    #     pass
+    #     #compare the current price instance with passed var
 
     def setPrice(self,val):
         self.price=val
