@@ -20,6 +20,9 @@ def execSysCmd(dastoor):
     return j
 ###########
 
+
+def ffloat(f):
+    return float(f.replace(',', ''))
 """
 Random Text helper
 """
