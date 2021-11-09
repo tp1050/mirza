@@ -17,3 +17,12 @@
 from Address import *
 
 base0LAN=Address(host='192.168.2.10',user='c',database='Moozmar')
+
+class Degjet(object):
+    def begoo(self):
+        ret=''
+        for a in vars(self):
+            s=str(a)+' '+s
+        return s
+    def sabt(self):
+        pass
