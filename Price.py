@@ -34,6 +34,11 @@ class Price(object):
     def getDic(self):
         return vars(self)
 
+    def begoo(self):
+        return (
+            "{} claims: {} is sold  at:{}  :{} at :{}".format(self.src, self.jens, self.value,
+                                                                                     self.refCurrency, self.vaght))
+
 
 
 
