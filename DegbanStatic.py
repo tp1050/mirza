@@ -19,7 +19,7 @@ from anbar import *
 
 base0LAN=Address(host='192.168.2.10',user='c',database='Moozmar')
 
-class Degjet(object):
+class DegJet(object):
 
     def __init__(self,conn='No'):
         self.conn=conn
@@ -32,11 +32,11 @@ class Degjet(object):
             s = str(a) + sep + s
         return s
     def sabt(self):
-        dic=getDic()
+        dic=self.getDic()
         s=''
         for k in dic:
             s=k+','+s
-        pp=berin(',{}',len(dic))[1:]
+        pp=berin(sign=',{}',n=slen(dic))[1:]
         for k in dic:
             pp=pp.format(dic[k])
         # stmt=self.begoo(sep=',')
