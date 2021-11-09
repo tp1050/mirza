@@ -32,10 +32,11 @@ Random Text helper
 def berin(n=1,sign='-',indent=0):
     if sign=='t$':
         sign=datetime.now()
+    s=''
     for i in range(n):
-        sign=sign+sign
-    print(sign)
-    return sign
+        s=sign+s
+    print(s)
+    return s
 
 ###########
 
