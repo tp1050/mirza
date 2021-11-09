@@ -53,6 +53,7 @@ def bezar(tbl,col,val,conn='NO'):
     if conn == 'NO':
         conn = getAnbar()
     stmt='insert into {} ({}) values({});'.format(tbl,col,val)
+    print (stmt)
     return exec(stmt,conn)
 
 def getDicID(org,conn='NO'):
