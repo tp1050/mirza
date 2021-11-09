@@ -36,7 +36,7 @@ class Price(object):
 
     def begoo(self):
         return (
-            "{} claims: {} is sold  at:{}  :{} at :{}".format(self.src, self.jens, self.value,
+            "{} claims: {} is sold  at {} {} at {}".format(self.src, self.jens, self.value,
                                                                                      self.refCurrency, self.vaght))
 
 
