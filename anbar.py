@@ -42,13 +42,13 @@ def exec(stmt,conn='NO'):
 
 
 
-# def begir(col,tbl,cndtion,conn='NO'):
-#     if conn=='NO':
-#         conn = getAnbar()
-#
-#     stmt2=stmt.format(col,tbl,cndtion,col)
-#     ret=(
-#     return ret
+def begir(tbl,col,cndtion,conn='NO'):
+    if conn=='NO':
+        conn = getAnbar()
+    stmt='select {} from {} where {}="{}";'
+    stmt2=stmt.format(col,tbl,col,cndtion)
+    ret=exec(stmt2)
+    return ret
 
 def getDicID(org,conn='NO'):
     res=-1
