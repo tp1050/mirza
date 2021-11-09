@@ -62,13 +62,14 @@ def getDicID(org,conn='NO'):
 
     else:
         exec('insert into Moozmar.Dictionary(original) values("{}");'.format(org),conn)
-        res=getSymID(org,conn)
+        res=getDicID(org,conn)
     return res
 
 def getSymID(dicEq,conn = 'NO'):
     if conn == 'NO':
         conn = getAnbar()
     stmt = 'select ID from Moozmar.Deg2Sym where sym="{}";'.format(dicEq)
+
     res = exec(stmt.format(dicEq), conn)
     if res is not None:
         return res[0]
