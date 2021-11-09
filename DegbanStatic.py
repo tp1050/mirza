@@ -15,14 +15,30 @@
 # defPassword='Karen22111357*'
 # defDatabase='ISP'      # nothing till further notice !
 from Address import *
+from anbar import *
 
 base0LAN=Address(host='192.168.2.10',user='c',database='Moozmar')
 
 class Degjet(object):
-    def begoo(self):
-        ret=''
-        for a in vars(self):
-            s=str(a)+' '+s
+
+    def __init__(self,conn='No'):
+        self.conn=conn
+
+    def getDic(self):
+        return vars(self)
+    def begoo(self,sep=' '):
+        ret = ''
+        for a in getDic():
+            s = str(a) + sep + s
         return s
     def sabt(self):
-        pass
+        dic=getDic()
+        s=''
+        for k in dic:
+            s=k+','+s
+        pp=berin(',{}',len(dic))[1:]
+        for k in dic:
+            pp=pp.format(dic[k])
+        # stmt=self.begoo(sep=',')
+        # bezar()
+        print(s,pp)
