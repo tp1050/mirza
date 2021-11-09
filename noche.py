@@ -26,11 +26,15 @@ def ffloat(f):
 """
 Random Text helper
 """
+
+
+"""   t$ for timestamp"""
 def berin(n=1,sign='-',indent=0):
-    s=sign
+    if sign=='t$':
+        sign=datetime.now()
     for i in range(n):
-        s=s+sign
-        print(s)
+        sign=sign+sign
+    print(s)
     return s
 
 ###########
