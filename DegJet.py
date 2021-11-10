@@ -1,9 +1,13 @@
-#from anbar import bezar
+
 class DegJet(object):
 
-    def __init__(self,conn='No'):
+    def __init__(self,conn='No',id=0):
+        self.id=id
         self.test='test2'
         self.conn=conn
+    def mkDBtBL(self):
+        stmt='create table {}'
+        return
     def name(self):
         return self.__class__.__name__
     def getDic(self):
@@ -32,16 +36,4 @@ class DegJet(object):
             p = p + ',' + '{}'.format(dic[k])
         p = p[1:]
         print(p)
-        bezar(self.name,s,p,self.conn)
-        # pp=berin(sign=',{}',n=len(dic.keys()))[1:]
-        # print(pp)
-        # i=0
-        # for k in dic:
-        #     berin(i,'+')
-        #     print(dic[k])
-        #     pp=pp.format()
-        #     print(pp)
-        #     i=i+1
-        # # stmt=self.begoo(sep=',')
-        # # bezar()
-        print(s)
+        return (self.name,s,p,self.conn)
