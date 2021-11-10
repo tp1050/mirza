@@ -1,4 +1,4 @@
-from Khadang import mySQLTypeGen
+from Khadang import mySQLTypeGen,mySQLTypedFormat
 import MySQLdb
 class DegJet(object):
 
@@ -38,7 +38,7 @@ class DegJet(object):
         for k in dic:
             if k == 'conn':
                 continue
-            val = val + ',' + '{}'.format(dic[k])
+            val = val + ',' + '{}'.format(mySQLTypedFormat(dic[k]))
         val = val[1:]
         return {'tbl':self.name(), 'col':col, 'val':val}
     

@@ -23,7 +23,7 @@ class Price(DegJet):
         """
         Calculate the xChange Rate between two currencies. the relation is non transitive
         """
-        #{$HOMEWORK$}
+        ##{$HOMEWORK$}
         pass
     
     def xChange(self,newCur):

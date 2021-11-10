@@ -31,6 +31,8 @@ class Anbar(AnbarBase):
         a=super().sabt()
         self.bezar(**a)
         return a
+    def makeDbTbl(self):
+        self.exec(stmt=super().makeDbTbl(),all=9)
 
 
 

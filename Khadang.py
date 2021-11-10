@@ -13,6 +13,11 @@ def mySQLTypeGen(element):
         return 'float'
     else:
         return 'VARCHAR(2)'
+def mySQLTypedFormat(e):
+    if isinstance(e, numbers.Number):
+        return  e
+    else:
+        return '`{}`'.format(e)
 
 """
 Random Text helper
