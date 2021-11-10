@@ -1,3 +1,4 @@
+from anbar import bezar
 class DegJet(object):
 
     def __init__(self,conn='No'):
