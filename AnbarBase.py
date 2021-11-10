@@ -8,9 +8,9 @@ from DegJet import *
 
 class AnbarBase(DegJet):
     def __init__(self,host='192.168.2.10',user='c',password='22111357',port=3306,database='Moozmar'):
+        self.database = database
         self.host=host
         self.port=port
-        self.database=database
         self.user=user
         self.password=password
         try:

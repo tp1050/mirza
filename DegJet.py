@@ -41,7 +41,7 @@ class DegJet(object):
         s=''
         for key in dic:
             
-            s=s+',{} {}'.format(key,mySQLTypeGen(key))
+            s=s+',`{}` {}'.format(key,mySQLTypeGen(key))
 
         print (s)
         stmt='CREATE TABLE {}({});'.format(self.name(),s[1:])
