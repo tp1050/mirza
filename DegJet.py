@@ -17,8 +17,8 @@ class DegJet(object):
         ret = ''
         dic=self.getDic()
         for k in dic:
-            ret = '{} : {} '.format(str(k) ,dic[k])+ sep + ret
-        return ret
+            ret = ', {} : {} '.format(str(k) ,dic[k])+ sep + ret
+        return ret[1:]
     def sabt(self):
         dic=self.getDic()
         s=''
