@@ -12,7 +12,7 @@ def mySQLTypeGen(element):
     if isinstance(element, numbers.Number):
         return 'float'
     else:
-        return 'VARCHAR(2)'
+        return 'VARCHAR(256)'
 def mySQLTypedFormat(e):
     if isinstance(e, numbers.Number):
         return  e

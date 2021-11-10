@@ -7,8 +7,11 @@ from DegJet import *
 
 
 class AnbarBase(DegJet):
+    stmtSlctCndt='select %s from %s where %s=%s;'
+    stmtSlct = 'select %s from %s;'
+    insrtStmt=' insert into %s(<%$tmtCol%>) values(<%$tmtVals%>)'
+    
     def __init__(self,host='192.168.5.17',user='c',password='22111357',port=3306,database='Moozmar'):
-       
         super().__init__()
         self.database = database
         self.host=host
@@ -48,7 +51,7 @@ class AnbarBase(DegJet):
 
     def begir(self,tbl,col,condtion='',stmt=''):
         if condtion:
-            stmt='select {} from {} where {}="{}";'.format(col,tbl,col,condtion)
+            stmt="""select {} from {} where {}="{}";""".format(col,tbl,col,condtion)
         else:
             stmt = 'select {} from {};'.format(col,tbl,col)
         ret=self.exec(stmt=stmt)
