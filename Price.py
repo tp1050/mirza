@@ -18,34 +18,17 @@ class Price(DegJet):
         if jensID == 0:
             self.jensID = getSymID(self.jens, conn)
    
-   
-   
-   
-   
-   
-    def etXchangeRate(self,a,b):
-        return 0.7
-    
-    
-    
+
     def getXchangeRate(self,cur1,cur2,vaght=datetime.now(),dirty=1,timeHedge=1,conn='No'):
         """
         Calculate the xChange Rate between two currencies. the relation is non transitive
         """
         #{$HOMEWORK$}
         pass
-
-
-
-
-
-
     
     def xChange(self,newCur):
         """
-
-
-
+        #{$HOMEWORK$}
         """
         newVal=self.value*getXchangeRate(self.refCurrency,newCur)
         self.refCurrency=newCur
@@ -53,16 +36,20 @@ class Price(DegJet):
         self.value=newVal
         #get Xchange Rate of curRef to neCur
         #update the abslout price value and newCur Simulataneously
-    def compare(self,p:Price):
-        if self.refCurID==p.refCurID:
-           if self.value>p.value:
+        # {$HOMEWORK$}
+
+    def compare(self,otherPrice):
+        if self.refCurID==otherPrice.refCurID:
+           if self.value>otherPrice.value:
                return 'Bigger'
            else:
                return 'Smaller'
         else:
-            pass
+            newMe=self.xChange('fx_irr')
+            otherPrrice=otherPrice.xChange('fx_irr')
+            return newMe.compare(otherPrice)
 
-
+ 
   
     def begoo(self):
         return (
