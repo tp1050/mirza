@@ -36,18 +36,16 @@ class AnbarBase:
         except Exception as e:
             sexyError(e)
         mc.close()
-     
         return recs
-    #
-    #
-    #
-    # def begir(tbl,col,cndtion,conn='NO'):
-    #     if conn=='NO':
-    #         conn = getAnbar()
-    #     stmt='select {} from {} where {}="{}";'
-    #     stmt2=stmt.format(col,tbl,col,cndtion)
-    #     ret=exec(stmt2)
-    #     return ret
+
+
+    def begir(self,tbl,col,condtion='',stmt=''):
+        if condtion:
+            stmt='select {} from {} where {}="{}";'.format(col,tbl,col,condtion)
+        else:
+            stmt = 'select {} from {};'.format(col,tbl,col)
+        ret=self.exec(stmt)
+        return ret
     # def bezar(tbl,col,val,conn='NO'):
     #     if conn == 'NO':
     #         conn = getAnbar()
