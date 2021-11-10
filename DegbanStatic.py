@@ -51,7 +51,7 @@ class DegJet(object):
             p = p + ',' + '{}'.format(dic[k])
         p = p[1:]
         print(p)
-        bezar()
+        # bezar()
         # pp=berin(sign=',{}',n=len(dic.keys()))[1:]
         # print(pp)
         # i=0
