@@ -6,7 +6,7 @@ class Address(DegJet):
         self.password=password
         self.database=database
         self.port=port
-        self.serverType=serverType
+        # self.serverType=serverType
 
     def setUser(self,user):
         self.user=user

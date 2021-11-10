@@ -2,61 +2,44 @@ import mysql.connector
 from mysql.connector import Error
 import sys
 import MySQLdb
+from Khadang import *
 
 
 class AnbarBase:
 
-    def __init__(self,host='localhost',user='c',password='22111357',port=3306,database='Moozmar'):
+    def __init__(self,host='192.168.2.10',user='c',password='22111357',port=3306,database='Moozmar'):
         self.host=host
         self.port=port
         self.database=database
         self.user=user
         self.password=password
-        l=vars(self)
-        self.conn=mysql.connector.connect(**l)
-
+        try:
+            self.conn=mysql.connector.connect(host=self.host,port=self.port,user=self.user,password=self.password,database=self.database)
+        except Error as e :
+            sexyError(e)
+            
+            
     @staticmethod
     def mySQLize(s):
         return   MySQLdb.escape_string(s)
 
-    # def gettAnbar(self):
-    #     return self.conn
-    #
-    #
-    # def getAnbar(loc='No',secure=0):
-    #     if loc=='N0':
-    #         loc=Address()
-    #     if secure:
-    #         return False
-    #     l=loc.getLocation()
-    #     # print(l)
-    #     try:
-    #         conn = mysql.connector.connect(**l)
-    #         # berin(1,'%')
-    #         if conn.is_connected():
-    #             print('Connected to MySQL database')
-    #             return conn
-    #         else:
-    #             return None
-    #     except Error as e:
-    #         sexyError(e)
-    # def exec(stmt,conn='NO'):
-    #     passed=1
-    #     if conn=='NO':
-    #         conn = getAnbar()
-    #         passed = 0
-    #     mc = conn.cursor(buffered=True)
-    #     recs="   "
-    #     try:
-    #         mc.execute(stmt)
-    #         conn.commit()
-    #         recs=mc.fetchone()
-    #     except Exception as e:
-    #         sexyError(e)
-    #     mc.close()
-    #     if not passed:
-    #         conn.close()
-    #     return recs
+    def exec(self,stmt,all=0):
+
+        mc = self.conn.cursor(buffered=True)
+        recs="   "
+        try:
+            mc.execute(stmt)
+            self.conn.commit()
+            if all:
+                recs=mc.fetchone()
+            else:
+                recs=mc.fetchall()
+        except Exception as e:
+            sexyError(e)
+        mc.close()
+        if not passed:
+            conn.close()
+        return recs
     #
     #
     #
