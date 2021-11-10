@@ -40,7 +40,7 @@ class DegJet(object):
         dic=self.getDic()
         s=''
         for key in dic:
-            # s=s+','+MySQLdb.escape_string(key) +' '+mySQLTypeGen(key)
+            
             s=s+',{} {}'.format(key,mySQLTypeGen(key))
 
         print (s)
