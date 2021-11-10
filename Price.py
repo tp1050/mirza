@@ -4,7 +4,7 @@ from anbar import *
 from DegbanStatic import *
 
 class Price(DegJet):
-    def __init__(self,vaght=datetime.now(),value=0,refCurrency='fx_irr',src='admin',jens='dool',refCurID=49,conn='no'):
+    def __init__(self,vaght=datetime.now(),value=0,refCurrency='fx_irr',src='admin',jens='dool',refCurID=49,conn='no',exact=1):
         self.vaght=vaght
         self.value=value
         self.refCurrency=refCurrency
@@ -50,14 +50,7 @@ class Price(DegJet):
   
     def begoo(self):
         return (
-            "{} claims: {} is sold  at {} {} at {}".format(self.src, self.jens, self.value,
-                        
-                        
-                        
-                        
-                        
-                        
-                                                                                     self.refCurrency, self.vaght))
+            "{} claims: {} is sold  at {} {} at {}".format(self.src, self.jens, self.value,self.refCurrency, self.vaght))
 ########################
 
 

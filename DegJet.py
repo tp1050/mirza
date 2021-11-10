@@ -4,6 +4,9 @@ class DegJet(object):
         self.test='test2'
         self.conn=conn
 
+
+    def name(self):
+        return self.__class__.__name__
     def getDic(self):
         """
         REturns a dictionary containing the instance variables
