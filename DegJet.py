@@ -1,11 +1,9 @@
-from anbar import bezar
+#from anbar import bezar
 class DegJet(object):
 
     def __init__(self,conn='No'):
         self.test='test2'
         self.conn=conn
-
-
     def name(self):
         return self.__class__.__name__
     def getDic(self):

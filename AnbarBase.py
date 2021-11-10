@@ -24,7 +24,6 @@ class AnbarBase:
         return   MySQLdb.escape_string(s)
 
     def exec(self,stmt,all=0):
-
         mc = self.conn.cursor(buffered=True)
         recs="   "
         try:
