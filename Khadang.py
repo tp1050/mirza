@@ -1,9 +1,16 @@
 import datetime
 import sys
+import numbers
 ### Math Helpers
 def ffloat(f):
     return float(f.replace(',', ''))
 
+
+def isscalar(num):
+    if isinstance(num, generic):
+        return True
+    else:
+        return type(num) in ScalarType
 
 """
 Random Text helper

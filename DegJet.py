@@ -5,9 +5,7 @@ class DegJet(object):
         self.id=id
         self.test='test2'
         self.conn=conn
-    def mkDBtBL(self):
-        stmt='create table {}'
-        return
+
     def name(self):
         return self.__class__.__name__
     def getDic(self):
@@ -37,3 +35,9 @@ class DegJet(object):
         p = p[1:]
         print(p)
         return (self.name,s,p,self.conn)
+    def mkDBtBL(self):
+        dic=self.getDic()
+        for key in dic:
+            s=key+' '
+        stmt='CREATE TABLE {} (name VARCHAR(20));'.format(self.name())
+        return
