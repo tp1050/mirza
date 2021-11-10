@@ -26,11 +26,19 @@ class DegJet(object):
         self.conn=conn
 
     def getDic(self):
+        """
+        REturns a dictionary containing the instance variables
+        """
         return vars(self)
+
     def begoo(self,sep=' '):
+        """
+        Produces a String CURRENT*STATE of the instance
+        """
         ret = ''
-        for a in getDic():
-            s = str(a) + sep + s
+        dic=self.getDic()
+        for k in dic:
+            s = '{} : {} '.format(str(k) ,dic[k])+ sep + s
         return s
     def sabt(self):
         dic=self.getDic()
