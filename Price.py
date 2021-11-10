@@ -28,9 +28,22 @@ class Price(DegJet):
     
     
     
-    
+    def getXchangeRate(self,cur1,cur2,vaght=datetime.now(),dirty=1,timeHedge=1,conn='No'):
+        """
+        Calculate the xChange Rate between two currencies. the relation is non transitive
+        """
+
+
+
+
+
     
     def xChange(self,newCur):
+        """
+
+
+
+        """
         newVal=self.value*getXchangeRate(self.refCurrency,newCur)
         self.refCurrency=newCur
         self.refCurID=getSymID(newCur)
