@@ -36,8 +36,7 @@ class AnbarBase:
         except Exception as e:
             sexyError(e)
         mc.close()
-        if not passed:
-            conn.close()
+     
         return recs
     #
     #
