@@ -30,13 +30,17 @@ class DegJet(object):
         dic=self.getDic()
         col= ''
         for k in dic:
+            if k=='conn':
+                continue
             col= col + ',' + '`{}`'.format(k)
         col= col[1:]
         val= ''
         for k in dic:
+            if k == 'conn':
+                continue
             val = val + ',' + '{}'.format(dic[k])
         val = val[1:]
-        return dict(self.name(), col, val)
+        return {'tbl':self.name(), 'col':col, 'val':val}
     
     
     def makeDbTbl(self):

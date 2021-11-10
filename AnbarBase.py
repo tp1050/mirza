@@ -7,7 +7,8 @@ from DegJet import *
 
 
 class AnbarBase(DegJet):
-    def __init__(self,host='192.168.2.10',user='c',password='22111357',port=3306,database='Moozmar'):
+    def __init__(self,host='192.168.5.17',user='c',password='22111357',port=3306,database='Moozmar'):
+       
         super().__init__()
         self.database = database
         self.host=host
@@ -19,12 +20,13 @@ class AnbarBase(DegJet):
             if self.conn.is_connected():
                 print('Connected to MySQL database')
             else:
+                print('be ga raft')
                 assert('Be ga raft!!')
         except Error as e :
             sexyError(e)
             
             
-    @staticmethod
+
     def mySQLize(s):
         return   MySQLdb.escape_string(s)
 
@@ -54,6 +56,7 @@ class AnbarBase(DegJet):
     
     def bezar(self,tbl,col,val):
         stmt='insert into {}({}) values({});'.format(tbl,col,val)
+        print(stmt)
         return self.exec(stmt,all=9)
 
 

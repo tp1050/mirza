@@ -5,6 +5,7 @@ from DegbanStatic import *
 
 class Anbar(AnbarBase):
     def __init__(self,loc='No'):
+        self.conn = ''
         if loc=='No':
             loc=base0LAN
         super().__init__(**loc.getLocation())
