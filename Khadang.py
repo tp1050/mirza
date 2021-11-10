@@ -11,7 +11,7 @@ def mySQLTypeGen(element):
     if isinstance(element, numbers.Number):
         return 'float'
     else:
-        return 'varchar(256)'
+        return 'VARCHAR(2)'
 
 """
 Random Text helper

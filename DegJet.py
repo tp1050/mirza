@@ -44,5 +44,5 @@ class DegJet(object):
             s=s+',{} {}'.format(key,mySQLTypeGen(key))
 
         print (s)
-        stmt='create table {}({});'.format(self.name(),s[1:])
+        stmt='CREATE TABLE {}({});'.format(self.name(),s[1:])
         return stmt
