@@ -26,16 +26,17 @@ class DegJet(object):
     
     
     def sabt(self):
+        tbl=self.name()
         dic=self.getDic()
-        columns= ''
+        col= ''
         for k in dic:
-            columns= columns + ',' + '`{}`'.format(k)
-        columns= columns[1:]
-        rows= ''
+            col= col + ',' + '`{}`'.format(k)
+        col= col[1:]
+        val= ''
         for k in dic:
-            rows = rows + ',' + '{}'.format(dic[k])
-        rows = rows[1:]
-        return self.name(), columns, rows
+            val = val + ',' + '{}'.format(dic[k])
+        val = val[1:]
+        return dict(self.name(), col, val)
     
     
     def makeDbTbl(self):
