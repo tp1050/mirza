@@ -1,5 +1,6 @@
 from AnbarBase import AnbarBase
 from Address import Address
+from noche import isScaller
 
 class Anbar(AnbarBase):
     def __init__(self,loc):

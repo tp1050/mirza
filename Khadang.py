@@ -1,16 +1,17 @@
 import datetime
 import sys
 import numbers
+
 ### Math Helpers
 def ffloat(f):
     return float(f.replace(',', ''))
 
 
-def isscalar(num):
-    if isinstance(num, generic):
-        return True
+def mySQLTypeGen(element):
+    if isinstance(element, numbers.Number):
+        return 'float'
     else:
-        return type(num) in ScalarType
+        return 'varchar(256)'
 
 """
 Random Text helper
