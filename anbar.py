@@ -26,6 +26,10 @@ class Anbar(AnbarBase):
         if res is not None:
             return res[0]
         return -1
+    def sabt(self):
+        a=super().sabt()
+        self.bezar(**a)
+        return a
 
 
 

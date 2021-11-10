@@ -29,13 +29,15 @@ class DegJet(object):
         dic=self.getDic()
         columns= ''
         for k in dic:
-            columns= columns + ',' + '{}'.format(k)
+            columns= columns + ',' + '`{}`'.format(k)
         columns= columns[1:]
         rows= ''
         for k in dic:
             rows = rows + ',' + '{}'.format(dic[k])
         rows = rows[1:]
-        return (self.name(), columns, rows)
+        return self.name(), columns, rows
+    
+    
     def makeDbTbl(self):
         dic=self.getDic()
         s=''
