@@ -1,9 +1,12 @@
 from AnbarBase import AnbarBase
 from Address import Address
-from noche import isScaller
+from DegbanStatic import *
+
 
 class Anbar(AnbarBase):
-    def __init__(self,loc):
+    def __init__(self,loc='No'):
+        if loc=='No':
+            loc=base0LAN
         super().__init__(**loc.getLocation())
 
     def getDicID(self,org):

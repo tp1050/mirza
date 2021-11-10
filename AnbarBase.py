@@ -6,7 +6,7 @@ from Khadang import *
 from DegJet import *
 
 
-class AnbarBase(DegJect):
+class AnbarBase(DegJet):
     def __init__(self,host='192.168.2.10',user='c',password='22111357',port=3306,database='Moozmar'):
         self.host=host
         self.port=port

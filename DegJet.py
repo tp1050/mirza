@@ -1,4 +1,5 @@
 from Khadang import mySQLTypeGen
+import MySQLdb
 class DegJet(object):
 
     def __init__(self,conn='No',id=0):
@@ -39,7 +40,9 @@ class DegJet(object):
         dic=self.getDic()
         s=''
         for key in dic:
-            s=s+','+key +' '+mySQLTypeGen(key)
+            # s=s+','+MySQLdb.escape_string(key) +' '+mySQLTypeGen(key)
+            s=s+',{} {}'.format(key,mySQLTypeGen(key))
+
         print (s)
-        stmt='CREATE TABLE {} ({});'.format(self.name(),s)
+        stmt='create table {}({});'.format(self.name(),s[1:])
         return stmt
