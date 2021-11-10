@@ -1,4 +1,4 @@
-from DegbanStatic import *
+from DegJet import *
 class Address(DegJet):
     def __init__(self,host='localhost',user='doolsaz',password='22111357',database='021',port=3306,serverType='mySql'):
         self.host=host
