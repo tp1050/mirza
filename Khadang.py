@@ -8,6 +8,7 @@ def ffloat(f):
 
 
 def mySQLTypeGen(element):
+    print(element)
     if isinstance(element, numbers.Number):
         return 'float'
     else:

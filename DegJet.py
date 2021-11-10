@@ -4,7 +4,6 @@ class DegJet(object):
 
     def __init__(self,conn='No',id=0):
         self.id=id
-        self.test='test2'
         self.conn=conn
 
     def name(self):
@@ -24,25 +23,23 @@ class DegJet(object):
         for k in dic:
             ret = ', {} : {} '.format(str(k) ,dic[k])+ sep + ret
         return ret[1:]
+    
+    
     def sabt(self):
         dic=self.getDic()
-        s=''
+        columns= ''
         for k in dic:
-            s=s+','+'{}'.format(k)
-        s=s[1:]
-        p=''
+            columns= columns + ',' + '{}'.format(k)
+        columns= columns[1:]
+        rows= ''
         for k in dic:
-            p = p + ',' + '{}'.format(dic[k])
-        p = p[1:]
-        print(p)
-        return (self.name,s,p,self.conn)
-    def mkDBtBL(self):
+            rows = rows + ',' + '{}'.format(dic[k])
+        rows = rows[1:]
+        return (self.name(), columns, rows)
+    def makeDbTbl(self):
         dic=self.getDic()
         s=''
         for key in dic:
-            
-            s=s+',`{}` {}'.format(key,mySQLTypeGen(key))
-
-        print (s)
+            s=s+',`{}` {}'.format(key,mySQLTypeGen(dic[key]))
         stmt='CREATE TABLE {}({});'.format(self.name(),s[1:])
         return stmt
