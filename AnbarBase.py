@@ -1,7 +1,7 @@
 import mysql.connector
-from mysql.connector import Error
+from mysql.connector import ProgrammingError
 import sys
-import MySQLdb
+# import MySQLdb
 from Khadang import *
 from DegJet import *
 
@@ -25,19 +25,19 @@ class AnbarBase(DegJet):
             else:
                 print('be ga raft')
                 assert('Be ga raft!!')
-        except Error as e :
+        except ProgrammingError as e :
             sexyError(e)
             
             
 
-    def mySQLize(s):
-        return   MySQLdb.escape_string(s)
+    # def mySQLize(s):
+    #     return   MySQLdb.escape_string(s)
 
     def exec(self,stmt,all=0):
-        mc = self.conn.cursor(buffered=True)
+        mc = self.conn.cursor(prepared=True)
         recs="   "
         try:
-            mc.execute(stmt,'')
+            mc.execute(stmt)
             self.conn.commit()
             if all==0:
                 recs=mc.fetchone()
@@ -47,6 +47,40 @@ class AnbarBase(DegJet):
             sexyError(e)
         mc.close()
         return recs
+    
+    
+    
+    def execPS(self,stmt,tuplee,all=1):
+        cursor=self.conn.cursor(prepared=True)
+        params = ("*",)
+        cursor.execute("SELECT * FROM products WHERE name = %s", params)
+        a = cursor.fetchall()
+        cursor.close()
+        cursor = self.conn.cursor(prepared=True)
+        a = cursor.fetchall()
+        params=('products',)
+        aa=cursor.execute("SELECT * FROM %s",params)
+        #     mc = self.conn.cursor(prepared=True)
+        #     recs="   "
+        # # try:
+        #     params=('id','test',)
+        #     mc.execute("""select %s from %s;""",params)
+        #     print(34343)
+        #
+        #     # self.conn.commit()
+        #     print(3423423)
+        #     if all==0:
+        #         recs=mc.fetchone()
+        #         return recs
+        #     elif all==1:
+        #         recs=mc.fetchall()
+        #         return recs
+        #     self.conn.commit()
+        # # except Exception as e:
+        # #     # print(mc.description())
+        # #     sexyError(e)
+        # #     mc.close()
+        #     return recs
 
 
     def begir(self,tbl,col,condtion='',stmt=''):
@@ -56,7 +90,21 @@ class AnbarBase(DegJet):
             stmt = 'select {} from {};'.format(col,tbl,col)
         ret=self.exec(stmt=stmt)
         return ret
+    def begirPS(self,tbl,col,condtion=''):
+        stmt=''
+        if condtion:
+            stmt = ("""select %s from %s where %s=%s;""",(col, tbl, col, condtion,))
+            return stmt
+        else:
+            stmt = """select id from test; """,(col, tbl,)
+            return stmt
+        return -1
     
+        
+        
+        
+        
+        
     def bezar(self,tbl,col,val):
         stmt='insert into {}({}) values({});'.format(tbl,col,val)
         print(stmt)
