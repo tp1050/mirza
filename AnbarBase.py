@@ -37,7 +37,7 @@ class AnbarBase(DegJet):
         mc = self.conn.cursor(buffered=True)
         recs="   "
         try:
-            mc.execute(stmt)
+            mc.execute(stmt,'')
             self.conn.commit()
             if all==0:
                 recs=mc.fetchone()
@@ -51,7 +51,7 @@ class AnbarBase(DegJet):
 
     def begir(self,tbl,col,condtion='',stmt=''):
         if condtion:
-            stmt="""select {} from {} where {}="{}";""".format(col,tbl,col,condtion)
+            stmt="""select %s from %s where {}="{}";""".format(col,tbl,col,condtion)
         else:
             stmt = 'select {} from {};'.format(col,tbl,col)
         ret=self.exec(stmt=stmt)
