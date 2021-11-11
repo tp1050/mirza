@@ -9,7 +9,7 @@ from DegJet import *
 class AnbarBase(DegJet):
     def __init__(self,host='192.168.5.17',user='c',password='22111357',port=3306,database='Moozmar'):
         super().__init__()
-        self.stmtSlctCndt = 'SELECT {COLNAMES} from {TABLE} where {CONDITION};'
+        self.stmtSlctCndt = 'SELECT {COLNAMES} from {TABLE} where {COLNAMES}={CONDITION};'
         self.stmtSlctNoCndt = 'select {COLNAMES} from {TABLE};'
         self.insrtStmt = 'INSERT INTO {TABLE}({COLNAMES}) VALUES({VALUES})'
         self.database = database
@@ -30,11 +30,15 @@ class AnbarBase(DegJet):
             sexyError(e)
 
 
-    def setParams(self,params=''):
+    def setParams(self,params='<NO>'):
+        if params=='<NO>' or params=='' or params==None :
+            self.params = ''
+            return self.params
+
         if isinstance(params,list):
             self.params=tuple(params)
         elif isinstance(params,dict):
-            self.params=params.values()
+            self.params=tuple(params.values())
         else:
             self.params=(params,)
         return self.params
@@ -44,41 +48,43 @@ class AnbarBase(DegJet):
 
 
     def exec(self,stmt='',params='',all=0):
-        if not stmt=='':
-            self.stmt=stmt
-            self.params = params
-        cursor=self.conn.cursor(prepared=True)
-        ret=cursor.execute(self.stmt,self.params)
+        cursor = self.conn.cursor(prepared=True)
+        if  len(stmt)>0:
+            self.setstmt=stmt
+            self.setParams(params)
+
+        if len(self.params)==0:
+            ret = cursor.execute(self.stmt)
+            ret = cursor.fetchall()
+        else:
+            print(self.stmt, self.params)
+            ret = cursor.execute(self.stmt, self.params)
+            ret = cursor.fetchall()
         self.conn.commit()
-        ret=cursor.fetchall()
         cursor.close()
         return ret
 
-    def bezar(self,tbl,cols,vals):
+    def bezar(self,table,colnames,vals):
         self.setParams(vals)
-        if isinstance(cols, list):
-
-            valPlaceHolders = ''
-            for ccc in cols:
-                valPlaceHolders = valPlaceHolders + ',{}'.format('%s')
-            colnames=virgool(cols)
-            valPlaceHolders = valPlaceHolders[1:]
-            valPlaceHolders=berin(len(vals),',%s')[1:]
-
-
+        if isinstance(colnames, list):
+            colnames=virgool(colnames)
+            valPlaceHolders=berin(len(vals),',%s',v=0)[1:]
         else:
-            colnames = cols
-
+            colnames = colnames
             valPlaceHolders = '%s'
-        self.stmt = self.insrtStmt.format(TABLE=tbl, COLNAMES=colnames, VALUES=valPlaceHolders)
+        self.stmt = self.insrtStmt.format(TABLE=table, COLNAMES=colnames, VALUES=valPlaceHolders)
         ret =self.exec(self.stmt,self.params)
         return ret
-    def begir(self,tbl,colnames,condition='<!no!>'):
-        if condition=='<!no!>':
-            self.stmt=self.stmtSlctNoCndt.format(TABLE=tbl,COLNAMES=colnames)
-            self.params=''
-        else:
-            self.stmt = self.stmtSlctCndt.format(TABLE=tbl, COLNAMES=colnames,CONDITION=condition)
-            self.params=(condition,)
-        ret= exec(self.stmt,self.params)
 
+
+    def begir(self,table,colnames,condition='<!no!>'):
+
+        if condition=='<!no!>':
+            self.stmt=self.stmtSlctNoCndt.format(TABLE=table, COLNAMES=colnames)
+            self.params=''
+            ret = self.exec(self.stmt)
+        else:
+            self.stmt = self.stmtSlctCndt.format(TABLE=table, COLNAMES=colnames, CONDITION=condition)
+            self.setParams(condition)
+            ret = self.exec(self.stmt, self.params)
+        return ret
