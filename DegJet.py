@@ -1,5 +1,5 @@
 from Khadang import mySQLTypeGen,mySQLTypedFormat
-import MySQLdb
+# import MySQLdb
 class DegJet(object):
 
     def __init__(self,conn='No',id=0):

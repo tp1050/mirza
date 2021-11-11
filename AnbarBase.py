@@ -1,5 +1,6 @@
 import numbers
 
+
 import mysql.connector
 from mysql.connector import ProgrammingError
 import sys
@@ -57,19 +58,24 @@ class AnbarBase(DegJet):
     def exec(self,stmt='',params='<!No!>',all=0):
         self.setstmt = stmt
         self.setParams(params)
-        cursor = self.conn.cursor(prepared=True)
-        if self.params=='<!NO!>':
-            ret = cursor.execute(self.stmt)
-            ret = cursor.fetchall()
-            return ret
-        elif len(self.params)==0:
-            ret = cursor.execute(self.stmt)
-            ret = cursor.fetchall()
-        else:
-            ret = cursor.execute(self.stmt, self.params)
-            ret = cursor.fetchall()
-        self.conn.commit()
-        cursor.close()
+        ret=''
+        try:
+
+            cursor = self.conn.cursor(prepared=True)
+            if self.params=='<!NO!>':
+                ret = cursor.execute(self.stmt)
+                ret = cursor.fetchall()
+                return ret
+            elif len(self.params)==0:
+                ret = cursor.execute(self.stmt)
+                ret = cursor.fetchall()
+            else:
+                ret = cursor.execute(self.stmt, self.params)
+                ret = cursor.fetchall()
+            self.conn.commit()
+            cursor.close()
+        except Exception as e:
+            sexyError(e)
         return ret
 
     def bezar(self,table,colnames,vals):
