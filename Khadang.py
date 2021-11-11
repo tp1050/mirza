@@ -25,16 +25,50 @@ Random Text helper
 
 
 """   t$ for timestamp"""
-def berin(n=1,sign='-',indent=0):
+def berin(n=1,sign='-',indent=0,v=1):
     if sign=='t$':
         sign=datetime.now()
     s=''
     for i in range(n):
         s=sign+s
-    print(s)
+    if v:
+        print(s)
     return s
 
 ###########
+def embrace(boundBy):
+    boundByL=''
+    boundByR=''
+    if not boundBy == '':
+        if boundBy == '(' or boundBy == ')':
+            boundByL = '('
+            boundByR = ')'
+        elif boundBy == '{' or boundBy == '}':
+            boundByL = '{'
+            boundByR = '}'
+        elif boundBy == '{' or boundBy == '}':
+            boundByL = '{'
+            boundByR = '}'
+        elif boundBy == '<' or boundBy == '>':
+            boundByL = '<'
+            boundByR = '>'
+        elif boundBy == '[' or boundBy == ']':
+            boundByL = '['
+            boundByR = ']'
+
+    return boundByL,boundByR
+
+
+
+
+def virgool(inList,quotation='',sym=',',boundBy=''):
+    boundByL,boundByR=embrace(boundBy)
+    ret=''
+    for item in inList:
+        ret=ret+'{sym}'.format(sym=sym)+'{quotation}{item}{quotation}'.format(quotation=quotation,item=item)
+    ret='{boundByL}{ret}{boundByR}'.format(boundByL=boundByL,ret=ret[1:],boundByR=boundByR)
+    return ret
+
 
 def sexyError(e):
     print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
