@@ -7,17 +7,18 @@ from DegJet import *
 
 
 class AnbarBase(DegJet):
-    stmtSlctCndt='select <$COLNAMES> from <$TABLE> where <$CONDITION>;'
-    stmtSlctCndt='select <$COLNAMES> from <$TABLE>;'
-    insrtStmt='insert into <$TABLE>(<$COLNAMES>) (<$VALUES>)'
-    
     def __init__(self,host='192.168.5.17',user='c',password='22111357',port=3306,database='Moozmar'):
+        self.stmtSlctCndt = 'SELECT {COLNAMES} from {TABLE} where {CONDITION};'
+        self.stmtSlctNoCndt = 'select {COLNAMES} from {TABLE};'
+        self.insrtStmt = 'INSERT INTO {TABLE}({COLNAMES}) VALUES({VALUES})'
         super().__init__()
         self.database = database
         self.host=host
         self.port=port
         self.user=user
         self.password=password
+        self.stmt=''
+        self.params=''
         try:
             self.conn=mysql.connector.connect(host=self.host,port=self.port,user=self.user,password=self.password,database=self.database)
             if self.conn.is_connected():
@@ -27,84 +28,54 @@ class AnbarBase(DegJet):
                 assert('Be ga raft!!')
         except ProgrammingError as e :
             sexyError(e)
-            
-            
-    def e(self,stmt,params):
+
+
+    def setParams(self,params=''):
+        if isinstance(params,list):
+            self.params=tuple(params)
+        elif isinstance(params,dict):
+            pass
+        else:
+            self.params=(params,)
+        return self.params
+    def setStmt(self,stmt=''):
+        self.stmt=stmt
+
+
+
+    def exec(self,stmt='',params='',all=0):
+        if not stmt=='':
+            self.stmt=stmt
+            self.params = params
         cursor=self.conn.cursor(prepared=True)
-        ret=cursor.execute(stmt,params)
-        ret=c.fetchall()
+        ret=cursor.execute(self.stmt,self.params)
+        self.conn.commit()
+        ret=cursor.fetchall()
         cursor.close()
         return ret
 
-    # def mySQLize(s):
-    #     return   MySQLdb.escape_string(s)
-
-    def exec(self,stmt,all=0):
-        mc = self.conn.cursor(prepared=True)
-        recs="   "
-        try:
-            mc.execute(stmt)
-            # self.conn.commit()
-            if all==0:
-                recs=mc.fetchone()
-            elif all==1:
-                recs=mc.fetchall()
-        except Exception as e:
-            sexyError(e)
-        mc.close()
-        return recs
-    
-    
-    
-    def execPS(self,stmt,tuplee,all=1):
-            mc = self.conn.cursor(prepared=True)
-            recs="   "
-        # try:
-            mc.execute("""select %s from %s;""",('id','test',))
-            print(34343)
-
-            # self.conn.commit()
-            print(3423423)
-            if all==0:
-                recs=mc.fetchone()
-                return recs
-            elif all==1:
-                recs=mc.fetchall()
-                return recs
-            self.conn.commit()
-        # except Exception as e:
-        #     # print(mc.description())
-        #     sexyError(e)
-        #     mc.close()
-            return recs
-
-
-    def begir(self,tbl,col,condtion='',stmt=''):
-        if condtion:
-            stmt="""select %s from %s where {}="{}";""".format(col,tbl,col,condtion)
+    def bezar(self,tbl,cols,vals):
+        self.params=vals
+        if isinstance(cols, list):
+            colnames = ''
+            valPlaceHolders = ''
+            for ccc in cols:
+                colnames = colnames + ',{}'.format(ccc)
+                valPlaceHolders = valPlaceHolders + ',{}'.format('%s')
+            colnames= colnames[1:]
+            valPlaceHolders = valPlaceHolders[1:]
         else:
-            stmt = 'select {} from {};'.format(col,tbl,col)
-        ret=self.exec(stmt=stmt)
+            colnames = cols
+            valPlaceHolders = '%s'
+        self.stmt = self.insrtStmt.format(TABLE=tbl, COLNAMES=colnames, VALUES=valPlaceHolders)
+        ret =self.exec(self.params,self.params,commit=True)
         return ret
-    def begirPS(self,tbl,col,condtion=''):
-        stmt=''
-        if condtion:
-            stmt = ("""select %s from %s where %s=%s;""",(col, tbl, col, condtion,))
-            return stmt
+    def begir(self,tbl,colnames,condition='<!no!>'):
+        if condition=='<!no!>':
+            self.stmt=self.stmtSlctNoCndt.format(TABLE=tbl,COLNAMES=colnames)
+            self.params=''
         else:
-            stmt = """select id from test; """,(col, tbl,)
-            return stmt
-        return -1
-    
-        
-        
-        
-        
-        
-    def bezar(self,tbl,col,val):
-        stmt='insert into {}({}) values({});'.format(tbl,col,val)
-        print(stmt)
-        return self.exec(stmt,all=9)
-
-
+            self.stmt = self.stmtSlctCndt.format(TABLE=tbl, COLNAMES=colnames,CONDITION=condition)
+            self.params=(condition,)
+        ret= exec(self.stmt,self.params)
 
