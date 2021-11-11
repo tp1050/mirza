@@ -1,3 +1,5 @@
+import numbers
+
 import mysql.connector
 from mysql.connector import ProgrammingError
 import sys
@@ -30,34 +32,40 @@ class AnbarBase(DegJet):
             sexyError(e)
 
 
-    def setParams(self,params='<NO>'):
-        if params=='<NO>' or params=='' or params==None :
+    def setParams(self,params='<!No!>'):
+        if params=='<!No!>' or params=='' or params==None :
             self.params = ''
-            return self.params
-
-        if isinstance(params,list):
+        elif isinstance(params, numbers.Number):
+            self.params=(params,)
+        elif  isinstance(params,str):
+            self.params =(params,)
+        elif isinstance(params,list):
             self.params=tuple(params)
         elif isinstance(params,dict):
             self.params=tuple(params.values())
-        else:
-            self.params=(params,)
-        return self.params
+        elif isinstance(params,tuple):
+            self.params=params
+
+
+
+
     def setStmt(self,stmt=''):
         self.stmt=stmt
 
 
 
-    def exec(self,stmt='',params='',all=0):
+    def exec(self,stmt='',params='<!No!>',all=0):
+        self.setstmt = stmt
+        self.setParams(params)
         cursor = self.conn.cursor(prepared=True)
-        if  len(stmt)>0:
-            self.setstmt=stmt
-            self.setParams(params)
-
-        if len(self.params)==0:
+        if self.params=='<!NO!>':
+            ret = cursor.execute(self.stmt)
+            ret = cursor.fetchall()
+            return ret
+        elif len(self.params)==0:
             ret = cursor.execute(self.stmt)
             ret = cursor.fetchall()
         else:
-            print(self.stmt, self.params)
             ret = cursor.execute(self.stmt, self.params)
             ret = cursor.fetchall()
         self.conn.commit()
@@ -84,7 +92,10 @@ class AnbarBase(DegJet):
             self.params=''
             ret = self.exec(self.stmt)
         else:
-            self.stmt = self.stmtSlctCndt.format(TABLE=table, COLNAMES=colnames, CONDITION=condition)
+            self.stmt = self.stmtSlctCndt.format(TABLE=table, COLNAMES=colnames, CONDITION='%s')
+            berin(3, 'ppp')
+            print(condition)
+            berin(3, 'ppp')
             self.setParams(condition)
             ret = self.exec(self.stmt, self.params)
         return ret
