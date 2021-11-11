@@ -7,9 +7,9 @@ from DegJet import *
 
 
 class AnbarBase(DegJet):
-    stmtSlctCndt='select %s from %s where %s=%s;'
-    stmtSlct = 'select %s from %s;'
-    insrtStmt=' insert into %s(<%$tmtCol%>) values(<%$tmtVals%>)'
+    stmtSlctCndt='select <$COLNAMES> from <$TABLE> where <$CONDITION>;'
+    stmtSlctCndt='select <$COLNAMES> from <$TABLE>;'
+    insrtStmt='insert into <$TABLE>(<$COLNAMES>) (<$VALUES>)'
     
     def __init__(self,host='192.168.5.17',user='c',password='22111357',port=3306,database='Moozmar'):
         super().__init__()
@@ -29,6 +29,12 @@ class AnbarBase(DegJet):
             sexyError(e)
             
             
+    def e(self,stmt,params):
+        cursor=self.conn.cursor(prepared=True)
+        ret=cursor.execute(stmt,params)
+        ret=c.fetchall()
+        cursor.close()
+        return ret
 
     # def mySQLize(s):
     #     return   MySQLdb.escape_string(s)
@@ -38,7 +44,7 @@ class AnbarBase(DegJet):
         recs="   "
         try:
             mc.execute(stmt)
-            self.conn.commit()
+            # self.conn.commit()
             if all==0:
                 recs=mc.fetchone()
             elif all==1:
