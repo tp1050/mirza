@@ -51,7 +51,7 @@ class AnbarBase(DegJet):
     
     
     def execPS(self,stmt,tuplee,all=1):
-            mc = self.conn.cursor(buffered=True)
+            mc = self.conn.cursor(prepared=True)
             recs="   "
         # try:
             mc.execute("""select %s from %s;""",('id','test',))
