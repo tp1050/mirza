@@ -51,36 +51,26 @@ class AnbarBase(DegJet):
     
     
     def execPS(self,stmt,tuplee,all=1):
-        cursor=self.conn.cursor(prepared=True)
-        params = ("*",)
-        cursor.execute("SELECT * FROM products WHERE name = %s", params)
-        a = cursor.fetchall()
-        cursor.close()
-        cursor = self.conn.cursor(prepared=True)
-        a = cursor.fetchall()
-        params=('products',)
-        aa=cursor.execute("SELECT * FROM %s",params)
-        #     mc = self.conn.cursor(prepared=True)
-        #     recs="   "
-        # # try:
-        #     params=('id','test',)
-        #     mc.execute("""select %s from %s;""",params)
-        #     print(34343)
-        #
-        #     # self.conn.commit()
-        #     print(3423423)
-        #     if all==0:
-        #         recs=mc.fetchone()
-        #         return recs
-        #     elif all==1:
-        #         recs=mc.fetchall()
-        #         return recs
-        #     self.conn.commit()
-        # # except Exception as e:
-        # #     # print(mc.description())
-        # #     sexyError(e)
-        # #     mc.close()
-        #     return recs
+            mc = self.conn.cursor(buffered=True)
+            recs="   "
+        # try:
+            mc.execute("""select %s from %s;""",('id','test',))
+            print(34343)
+
+            # self.conn.commit()
+            print(3423423)
+            if all==0:
+                recs=mc.fetchone()
+                return recs
+            elif all==1:
+                recs=mc.fetchall()
+                return recs
+            self.conn.commit()
+        # except Exception as e:
+        #     # print(mc.description())
+        #     sexyError(e)
+        #     mc.close()
+            return recs
 
 
     def begir(self,tbl,col,condtion='',stmt=''):
