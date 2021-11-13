@@ -23,7 +23,7 @@ class DegJet(object):
         ret = ''
         dic=self.getDic()
         for k in dic:
-            ret = ', {key} : {value} {sep} {ret}'.format(key=str(k) ,value=dic[k],sep=sep,ret=ret)
+            ret = ',{key}:{value}{sep}{ret}'.format(key=str(k) ,value=dic[k],sep=sep,ret=ret)
         return ret[1:]
     
     

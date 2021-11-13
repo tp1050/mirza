@@ -9,7 +9,7 @@ def ffloat(f):
 
 
 def mySQLTypeGen(element):
-    print(element)
+    # print(element)
     if isinstance(element, numbers.Number):
         return 'float'
     else:
@@ -27,16 +27,19 @@ Random Text helper
 
 """   t$ for timestamp"""
 def berin(n=1,sign='-',indent=0,v=1):
-    indented=berin(n,' ')
-    if sign=='t$':
-        sign=datetime.now()
-    s=''
-    for i in range(n):
-        s=sign+s
-    s=indented+s
-    if v:
-        print(s)
-    return s
+    indented=''
+    if indent>0:
+        indented = berin(n=indent, sign=' ', indent=0, v=0)
+    else:
+        if sign=='t$':
+            sign=datetime.now()
+        ret= ''
+        for i in range(n):
+            ret= '{} {}'.format(sign , ret)
+        ret= '{}{}'.format(indented, ret)
+        if v:
+            print(ret)
+    return ret
 
 ###########
 
@@ -65,7 +68,7 @@ def braces(boundBy):
 
     return boundByL,boundByR
 
-def embrace(content,boundBy,boundBy2='<!NO!>'):
+def embrace(content,boundBy,boundBy2=unIn):
     ret = '{boundByL}{content}{boundByR}'
     if boundBy2==unIn:
         boundByL, boundByR=braces(boundBy)
