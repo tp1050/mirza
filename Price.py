@@ -1,10 +1,10 @@
 from datetime import datetime
-from noche import berin
+from Khadang import berin
 from anbar import *
 from DegbanStatic import *
 
 class Price(DegJet):
-    def __init__(self,vaght=datetime.now(),value=0,refCurrency='fx_irr',src='admin',jens='dool',refCurID=49,conn='no',exact=1):
+    def __init__(self,vaght=datetime.now(),value=0,refCurrency='fx_irr',src='admin',jens='dool',refCurID=49,conn='no',exact=1,validUntill='09/09/25 09:09:09',jensID=0):
         self.vaght=vaght
         self.value=value
         self.refCurrency=refCurrency
@@ -13,13 +13,16 @@ class Price(DegJet):
         self.exact=exact
         self.conn = conn
         self.discountRate = 0
-        self.validUntill='1999/09/09 09:09:09'
+        self.validUntil = datetime.strptime(validUntill, '%d/%m/%y %H:%M:%S')
         if self.conn == 'NO':
             conn = getAnbar(base0LAN)
         self.jensID = jensID
-        if jensID == 0:
-            self.jensID = getSymID(self.jens, conn)
-   
+        # if jensID == 0:
+        #     self.jensID = getSymID(self.jens, conn)
+
+    def berooze(self):
+        return datetime.now()<self.validUntil
+
     def discount(self,discountRate=0):
         if discountRate==0:
             pass
