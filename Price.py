@@ -12,12 +12,20 @@ class Price(DegJet):
         self.jens=jens
         self.exact=exact
         self.conn = conn
+        self.discountRate = 0
         if self.conn == 'NO':
             conn = getAnbar(base0LAN)
         self.jensID = jensID
         if jensID == 0:
             self.jensID = getSymID(self.jens, conn)
    
+    def discount(self,discountRate=0):
+        if discountRate==0:
+            pass
+        else:
+            self.discountRate=discountRate
+        self.value=+self.value-(self.value*self.discountRate)
+
 
     def getXchangeRate(self,cur1,cur2,vaght=datetime.now(),dirty=1,timeHedge=1,conn='No'):
         """
@@ -25,6 +33,7 @@ class Price(DegJet):
         """
         ##{$HOMEWORK$}
         pass
+    
     
     def xChange(self,newCur):
         """
