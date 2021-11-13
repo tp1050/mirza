@@ -36,6 +36,10 @@ def berin(n=1,sign='-',indent=0,v=1):
     return s
 
 ###########
+def embrace(content,boundBy,boundBy2=boundBy):
+    if boundBy==boundBy2:
+        boundByL, boundByr=embrace
+        ret='{}'
 def embrace(boundBy):
     boundByL=''
     boundByR=''
