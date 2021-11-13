@@ -4,7 +4,8 @@ from anbar import *
 from DegbanStatic import *
 
 class Price(DegJet):
-    def __init__(self,vaght=datetime.now(),value=0,refCurrency='fx_irr',src='admin',jens='dool',refCurID=49,conn='no',exact=1,validUntill='09/09/25 09:09:09',jensID=0):
+    def __init__(self,vaght=datetime.now(),value=0,refCurrency='fx_irr',src='admin',jens='dool',refCurID=49,conn='no',exact=1,validUntill='09/09/25 09:09:09',jensID=0,historical=1):
+        self.historical=historical
         self.vaght=vaght
         self.value=value
         self.refCurrency=refCurrency
@@ -21,6 +22,8 @@ class Price(DegJet):
         #     self.jensID = getSymID(self.jens, conn)
 
     def berooze(self):
+        if types==historical:
+            return True
         return datetime.now()<self.validUntil
 
     def discount(self,discountRate=0):

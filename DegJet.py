@@ -52,3 +52,9 @@ class DegJet(object):
             s=s+',`{}` {}'.format(key,mySQLTypeGen(dic[key]))
         stmt='CREATE TABLE {}({});'.format(self.name(),s[1:])
         return stmt
+
+
+    def str(self):
+        return self.begoo()
+    def __str__(self):
+        return self.begoo()
