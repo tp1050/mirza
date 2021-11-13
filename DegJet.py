@@ -4,7 +4,7 @@ from StaticsBase import unIn
 # import MySQLdb
 class DegJet(object):
 
-    def __init__(self,conn=unIN,id=0):
+    def __init__(self,conn=unIn,id=0):
         self.id=id
         self.conn=conn
 
