@@ -1,6 +1,7 @@
 import datetime
 import sys
 import numbers
+from StaticsBase import *
 
 ### Math Helpers
 def ffloat(f):
@@ -58,22 +59,26 @@ def braces(boundBy):
         elif boundBy == '[' or boundBy == ']':
             boundByL = '['
             boundByR = ']'
+        else:
+            boundByL=boundBy
+            boundByR=boundBy
 
     return boundByL,boundByR
-def embrace(content,boundBy,boundBy2=boundBy):
+
+def embrace(content,boundBy,boundBy2='<!NO!>'):
     ret = '{boundByL}{content}{boundByR}'
-    if boundBy==boundBy2:
-        boundByL, boundByR=embrace(braces(boundBy))
+    if boundBy2==unIn:
+        boundByL, boundByR=braces(boundBy)
     else:
         boundByL, boundByR = boundBy,boundBy2
     ret = ret.format(boundByL=boundByL, boundByR=boundByR, content=content)
     return ret
 
 def virgool(inList,quotation='',sym=',',boundBy=''):
-    boundByL,boundByR=embrace(boundBy)
+    boundByL, boundByR = embrace(boundBy)
     ret=''
     for item in inList:
-        ret=ret+'{sym}'.format(sym=sym)+'{quotation}{item}{quotation}'.format(quotation=quotation,item=item)
+            ret='{ret}{sym}{quotation}{item}{quotation}'.format(ret=ret,sym=sym,quotation=quotation,item=item)
     ret='{boundByL}{ret}{boundByR}'.format(boundByL=boundByL,ret=ret[1:],boundByR=boundByR)
     return ret
 

@@ -1,8 +1,10 @@
 from Khadang import mySQLTypeGen,mySQLTypedFormat
+from StaticsBase import unIn
+
 # import MySQLdb
 class DegJet(object):
 
-    def __init__(self,conn='No',id=0):
+    def __init__(self,conn=unIN,id=0):
         self.id=id
         self.conn=conn
 
@@ -21,7 +23,7 @@ class DegJet(object):
         ret = ''
         dic=self.getDic()
         for k in dic:
-            ret = ', {} : {} '.format(str(k) ,dic[k])+ sep + ret
+            ret = ', {key} : {value} {sep} {ret}'.format(key=str(k) ,value=dic[k],sep=sep,ret=ret)
         return ret[1:]
     
     
