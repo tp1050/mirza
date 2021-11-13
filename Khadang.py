@@ -26,21 +26,20 @@ Random Text helper
 
 """   t$ for timestamp"""
 def berin(n=1,sign='-',indent=0,v=1):
+    indented=berin(n,' ')
     if sign=='t$':
         sign=datetime.now()
     s=''
     for i in range(n):
         s=sign+s
+    s=indented+s
     if v:
         print(s)
     return s
 
 ###########
-def embrace(content,boundBy,boundBy2=boundBy):
-    if boundBy==boundBy2:
-        boundByL, boundByr=embrace
-        ret='{}'
-def embrace(boundBy):
+
+def braces(boundBy):
     boundByL=''
     boundByR=''
     if not boundBy == '':
@@ -61,9 +60,14 @@ def embrace(boundBy):
             boundByR = ']'
 
     return boundByL,boundByR
-
-
-
+def embrace(content,boundBy,boundBy2=boundBy):
+    ret = '{boundByL}{content}{boundByR}'
+    if boundBy==boundBy2:
+        boundByL, boundByR=embrace(braces(boundBy))
+    else:
+        boundByL, boundByR = boundBy,boundBy2
+    ret = ret.format(boundByL=boundByL, boundByR=boundByR, content=content)
+    return ret
 
 def virgool(inList,quotation='',sym=',',boundBy=''):
     boundByL,boundByR=embrace(boundBy)
