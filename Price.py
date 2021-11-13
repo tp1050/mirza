@@ -13,6 +13,7 @@ class Price(DegJet):
         self.exact=exact
         self.conn = conn
         self.discountRate = 0
+        self.validUntill='1999/09/09 09:09:09'
         if self.conn == 'NO':
             conn = getAnbar(base0LAN)
         self.jensID = jensID
