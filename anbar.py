@@ -1,29 +1,25 @@
+
 from AnbarBase import AnbarBase
-from Address import Address
+from StaticsBase import *
 from DegbanStatic import *
+from Address import Address
+
 
 
 class Anbar(AnbarBase):
-    def __init__(self,loc='No'):
-        self.conn = ''
-        if loc=='No':
+    def __init__(self,loc=UNIN):
+        if loc==UNIN:
             loc=base0LAN
         super().__init__(**loc.getLocation())
 
     def getDicID(self,org):
-        res=-1
-        stmt = 'select ID,eq from Moozmar.Dictionary where original="{}";'
-        res=self.exec(stmt.format(org))
-        if res is not None:
-            res=res
-        else:
-            self.exec('insert into Moozmar.Dictionary(original) values("{}");'.format(org))
-            res = self.getDicID(org)
+        res=self.begir(table='Moozmar.Dictionary',colnames=['ID','eq'],conCol='original',condition=org)
         return res
 
+
     def getSymID(self, dicEq):
-        stmt = 'select ID from Moozmar.Deg2Sym where sym="{}";'.format(dicEq)
-        res = self.exec(stmt.format(dicEq))
+        print(dicEq)
+        res=self.begir('Moozmar.Deg2Sym','id',conCol='sym',condition=dicEq,limit=1)
         if res is not None:
             return res[0]
         return -1
@@ -33,6 +29,12 @@ class Anbar(AnbarBase):
         return a
     def makeDbTbl(self):
         self.exec(stmt=super().makeDbTbl(),all=9)
+    def getJensById(self,id):
+        self.begir('Deg2Sym',sym,)
+        if res is not None:
+            return res[0]
+        return -1
+
 
 
 

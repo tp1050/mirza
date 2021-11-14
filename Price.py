@@ -2,28 +2,43 @@ from datetime import datetime
 from Khadang import berin
 from anbar import *
 from DegbanStatic import *
-
+from DegJet import *
+from StaticsBase import *
 class Price(DegJet):
-    def __init__(self,vaght=datetime.now(),value=0,refCurrency='fx_irr',src='admin',jens='dool',refCurID=49,conn='no',exact=1,validUntill='09/09/25 09:09:09',jensID=0,historical=1):
-        self.historical=historical
-        self.vaght=vaght
-        self.value=value
-        self.refCurrency=refCurrency
-        self.src=src
-        self.jens=jens
-        self.exact=exact
-        self.conn = conn
+    def __init__(self,value=0,refCurrency=UNIN,refCurID=0,jens=UNIN,jensID=0,src='admin',exact=1,vaght=datetime.now(),validUntill='09/09/25 09:09:09',historical=1,anbari=UNIN):
+        super().__init__()
+        self.exact = exact
         self.discountRate = 0
+        self.historical = historical and True
+    
+        self.vaght = vaght
         self.validUntil = datetime.strptime(validUntill, '%d/%m/%y %H:%M:%S')
-        if self.conn == 'NO':
-            conn = getAnbar(base0LAN)
+
+        self.src = src
+        self.value = value
+        
+        self.jens = jens
         self.jensID = jensID
-        # if jensID == 0:
-        #     self.jensID = getSymID(self.jens, conn)
+
+        self.refCurrency = refCurrency
+        self.refCurID = refCurID
+    
+        if anbari==UNIN:
+            self.anbari=Anbar(base0LAN)
+        if self.jens==UNIN:
+            self.jens=self.anbari.getJenByID(self.jensID)
+        elif self.jensID<1:
+            self.jensID=self.anbari.getSymID(self.jens)
+        if self.refCurrency==UNIN:
+            self.refCurrency=anbari.getJensById(self.refCurID)
+        elif self.refCurID<1:
+            self.anbari.getSymID(self.refCurrency)
+            
+    
 
     def berooze(self):
-        if types==historical:
-            return True
+        if historical:
+            return historical
         return datetime.now()<self.validUntil
 
     def discount(self,discountRate=0):
@@ -32,6 +47,7 @@ class Price(DegJet):
         else:
             self.discountRate=discountRate
         self.value=+self.value-(self.value*self.discountRate)
+        return self.value
 
 
     def getXchangeRate(self,cur1,cur2,vaght=datetime.now(),dirty=1,timeHedge=1,conn='No'):
@@ -39,20 +55,24 @@ class Price(DegJet):
         Calculate the xChange Rate between two currencies. the relation is non transitive
         """
         ##{$HOMEWORK$}
-        pass
+        return 0.7
     
     
-    def xChange(self,newCur):
+    def xChange(self,newCur='fx_irr'):
         """
         #{$HOMEWORK$}
         """
+        if self.refCurrency==newCur():
+            return self.value
+
         newVal=self.value*getXchangeRate(self.refCurrency,newCur)
         self.refCurrency=newCur
-        self.refCurID=getSymID(newCur)
+        self.refCurID=anbari.getSymID(newCur)
         self.value=newVal
         #get Xchange Rate of curRef to neCur
         #update the abslout price value and newCur Simulataneously
         # {$HOMEWORK$}
+        return this.value
 
     def compare(self,otherPrice):
         if self.refCurID==otherPrice.refCurID:

@@ -28,8 +28,8 @@ Text Processing
 
 ###############
 
-def sexyError(e):
-    print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+def sexyError(eror,verbose=True):
+    if verbose:print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
     return 'Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e
 
 def dic2str(d,separator=':'):
