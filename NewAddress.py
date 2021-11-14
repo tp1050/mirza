@@ -15,7 +15,11 @@ class NewAddress(DegJet):
         return self._host
     @host.setter
     def host(self, host):
-        self._host = host
+        if isValidHostStr(host):
+            self._host = host
+            return self.host
+        else:
+            raise Exception('Khiar')
 
     @property
     def user(self):
@@ -43,32 +47,10 @@ class NewAddress(DegJet):
         return self._port
     @port.setter
     def port(self,port):
-        self._port = port
-
-    def setUser(self,user):
-        self.user=user
-    def getUser(self):
-        return self.user
-
-    def setHost(self,user):
-        self.user=user
-    def getHost(self):
-        return self.user
-
-    def setDatabase(self, user):
-        self.user = user
-    def getDatabase(self):
-        return self.user
-
-    def setPort(self,user):
-        self.user=user
-    def getPort(self):
-        return self.user
-
-    def setType(self,serverType):
-        self.serverType = serverType
-    def getType(self):
-        return self.serverType
+        if isinstance(port,numbers.Number):
+            self._port = port
+        else:
+            raise Exception('Khair!')    
 
     def getLocation(self):
         temp={}

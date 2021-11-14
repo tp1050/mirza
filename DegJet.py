@@ -58,6 +58,10 @@ class DegJet(object):
             ret = ',{key}:{value}{sep}{ret}'.format(key=str(k) ,value=dic[k],sep=sep,ret=ret)
         return ret[1:]
 
+    def len(self):
+        return len(self.__dict__)
+    def __len__(self):
+        return self.len()
     def str(self):
         return self.begoo()
     def __str__(self):
