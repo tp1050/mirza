@@ -41,7 +41,9 @@ class DegJet(object):
         col= col[1:]
         val= ''
         for k in dic:
-            if k == 'conn':
+            k=k.strip()
+            print(k,'----->conn')
+            if k == 'conn' or k=='anbari' or k=='id':
                 continue
             val = val + ',' + '{}'.format(mySQLTypedFormat(dic[k]))
         val = val[1:]
