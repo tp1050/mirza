@@ -16,9 +16,11 @@ class AnbarBase(DegJet):
                 print('Connected to MySQL database')
             else:
                 print('be ga raft')
-                assert ('Be ga raft!!')
+                assert ('Khiar: Connection Nashod')
         except ProgrammingError as e:
             sexyError(e)
+
+
     def __init__(self,host='192.168.5.17',user='c',password='22111357',port=3306,database='Moozmar'):
         super().__init__()
    
@@ -86,7 +88,7 @@ class AnbarBase(DegJet):
         else:
             colnames = colnames
             valPlaceHolders = '%s'
-        self.stmt = self.insrtStmt.format(TABLE=table, COLNAMES=colnames, VALUES=valPlaceHolders)
+        self.stmt = INSRTCNDTION.format(TABLE=table, COLNAMES=colnames, VALUES=valPlaceHolders)
         ret =self.exec(self.stmt,self.params)
         return ret
 

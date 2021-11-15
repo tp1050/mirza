@@ -31,9 +31,10 @@ class DegJet(object):
     
     def sabt(self):
         tbl=self.name()
-        dic=self.getDic
+        dic=self.getDic()
         col= ''
         for k in dic:
+            print(k)
             if k=='conn':
                 continue
             col= col + ',' + '`{}`'.format(k)
