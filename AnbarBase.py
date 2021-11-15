@@ -71,6 +71,7 @@ class AnbarBase(DegJet):
                 ret = cursor.execute(self.stmt)
                 ret = cursor.fetchall()
             else:
+                print(self.stmt, self.params)
                 ret = cursor.execute(self.stmt, self.params)
                 ret = cursor.fetchall()
             self.conn.commit()
