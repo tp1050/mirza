@@ -8,7 +8,7 @@ from StaticsBase import *
 
 
 class AnbarBase(DegJet):
-    def connected(self):
+    def connect(self):
         try:
             self.conn = mysql.connector.connect(host=self.host, port=self.port, user=self.user, password=self.password,
                                                 database=self.database)
@@ -31,6 +31,7 @@ class AnbarBase(DegJet):
         self.password=password
         self.stmt=''
         self.params=''
+        # self.connect()
    
 
 

@@ -11,6 +11,7 @@ class Anbar(AnbarBase):
         if loc==UNIN:
             loc=base0LAN
         super().__init__(**loc.getLocation())
+        self.connect()
 
     def getDicID(self,org):
         res=self.begir(table='Moozmar.Dictionary',colnames=['ID','eq'],conCol='original',condition=org)
