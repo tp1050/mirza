@@ -4,9 +4,15 @@ import numbers
 import socket
 from StaticsBase import *
 
-
-
-  
+def getIpByHost(address):
+    ip=UNIN
+    try:
+        ip=socket.gethostbyname(host)
+    except Exception as e:
+        prrint(e)
+    return ip
+def isLive(address):
+      return getIpByHost()==True
    
 
 def is_valid_ipv4_address(address):

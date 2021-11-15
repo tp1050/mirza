@@ -65,4 +65,4 @@ class DegJet(object):
     def str(self):
         return self.begoo()
     def __str__(self):
-        return self.begoo()
+        return '{'+self.begoo()+'}\n'

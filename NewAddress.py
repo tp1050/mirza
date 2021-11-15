@@ -1,3 +1,4 @@
+import Khadang
 from DegJet import *
 from Khadang import isValidHostStr
 import numbers
@@ -8,18 +9,25 @@ class NewAddress(DegJet):
         self.password=password
         self.database=database
         self.port=port
+        self.reachble=0
         # self.serverType=serverType
 
     @property
     def host(self):
         return self._host
     @host.setter
-    def host(self, host):
+    def host(self, host,chkLive=0):
         if isValidHostStr(host):
             self._host = host
-            return self.host
         else:
             raise Exception('Khiar')
+        if chkLive:
+            print(Khadang.getIpByHost(host))
+            self.reachble=Khadang.isLive(host)
+            print(self.reachble)
+
+
+
 
     @property
     def user(self):
