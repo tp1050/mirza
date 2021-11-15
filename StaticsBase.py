@@ -16,4 +16,4 @@ ValidHostnameRegex = "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([
 """MYSQL STMS"""
 stmtSlctCndtion= 'SELECT {COLNAMES} from {TABLE} where {CONCOL}={CONDITION};'
 stmtSlctNoCndtion = 'select {COLNAMES} from {TABLE};'
-INSRTCNDTION= 'INSERT INTO {TABLE}({COLNAMES}) VALUES({VALUES})'
+INSRTCNDTION= 'INSERT INTO {TABLE}({COLNAMES}) VALUES({VALS})'
