@@ -26,6 +26,7 @@ class Anbar(AnbarBase):
         return -1
     def sabt(self):
         a=super().sabt()
+        print(a)
         self.bezar(**a)
         return a
     def makeDbTbl(self):

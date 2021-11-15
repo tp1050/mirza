@@ -45,7 +45,7 @@ class DegJet(object):
                 continue
             val = val + ',' + '{}'.format(mySQLTypedFormat(dic[k]))
         val = val[1:]
-        return {'tbl':self.name(), 'col':col, 'val':val}
+        return {'table':self.name(), 'colnames':col, 'vals':val}
     
     
 

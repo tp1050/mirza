@@ -5,6 +5,7 @@ import sys
 from Khadang import *
 from DegJet import *
 from StaticsBase import *
+import traceback
 
 
 class AnbarBase(DegJet):
@@ -75,6 +76,7 @@ class AnbarBase(DegJet):
             self.conn.commit()
             cursor.close()
         except Exception as e:
+            print(traceback.format_exc())
             sexyError(e)
         if (isinstance(ret,list)):
             if len(ret)==1:
