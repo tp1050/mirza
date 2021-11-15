@@ -4,23 +4,17 @@ from StaticsBase import *
 # import MySQLdb
 class DegJet(object):
 
-    def __init__(self,conn=UNIN,id=UNIN,anbari=UNIN):
-        self.id=id
-        self.conn=conn
+    def __init__(self,anbari=UNIN):
         self.anbari=anbari
-    
-  
 
     """ Returns the Class name"""
     def name(self):
         return self.__class__.__name__
 
-
     def getDic(self):
         """ REturns a dictionary containing the instance variables """
         return vars(self)
 
-    
     def makeDbTbl(self):
         dic=self.getDic
         s=''
