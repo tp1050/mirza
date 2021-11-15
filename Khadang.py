@@ -7,12 +7,13 @@ from StaticsBase import *
 def getIpByHost(address):
     ip=UNIN
     try:
-        ip=socket.gethostbyname(host)
+        ip=socket.gethostbyname(address)
+        print(address,ip)
     except Exception as e:
-        prrint(e)
+        print(e)
     return ip
 def isLive(address):
-      return getIpByHost()==True
+      return not getIpByHost(address)=='127.0.0.1'
    
 
 def is_valid_ipv4_address(address):

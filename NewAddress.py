@@ -3,13 +3,14 @@ from DegJet import *
 from Khadang import isValidHostStr
 import numbers
 class NewAddress(DegJet):
-    def __init__(self,host='localhost',user='doolsaz',password='22111357',database='021',port=3306,serverType='mySql'):
+    def __init__(self,host='localhost',user='doolsaz',password='22111357',database='021',port=3306,serverType='mySql',reachable=UNIN):
+        self.reachable = reachable
         self.host=host
         self.user=user
         self.password=password
         self.database=database
         self.port=port
-        self.reachble=0
+
         # self.serverType=serverType
 
     @property
@@ -21,10 +22,10 @@ class NewAddress(DegJet):
             self._host = host
         else:
             raise Exception('Khiar')
-        if chkLive:
+        if not self.reachable==UNIN:
             print(Khadang.getIpByHost(host))
-            self.reachble=Khadang.isLive(host)
-            print(self.reachble)
+            self.reachable=Khadang.isLive(host)
+            print(self.reachable)
 
 
 
@@ -55,10 +56,11 @@ class NewAddress(DegJet):
         return self._port
     @port.setter
     def port(self,port):
+        # To Prevent any unforseen errors ports must be int and only int
         if isinstance(port,numbers.Number):
             self._port = port
         else:
-            raise Exception('Khair!')    
+            raise Exception('Port Must be int only')    
 
     def getLocation(self):
         temp={}
