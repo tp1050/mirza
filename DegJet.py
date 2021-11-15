@@ -15,7 +15,7 @@ class DegJet(object):
         """ REturns a dictionary containing the instance variables """
         return vars(self)
 
-    def makeDbTbl(self):
+    def makeDBTabl(self):
         dic=self.getDic
         s=''
         for key in dic:
@@ -24,9 +24,9 @@ class DegJet(object):
         return stmt
     
     def sabt(self):
-        tbl=self.name()
+        table=self.name()
         dic=self.getDic()
-        col= ''
+        colnames= ''
         for k in dic:
             print(k)
             if k=='conn':
